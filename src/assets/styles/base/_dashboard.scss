@@ -1,0 +1,448 @@
+//dashboard
+$primary-color: #78C2A4;
+$HeadingSize: 45px;
+$TitleSize : 14px;
+//carsole
+.carousel .slide {
+   
+    background: #fff; 
+    box-shadow: 0px 0px 4px 1px #d5d5d5;
+
+}
+.carouselCard{
+    background: #fff; 
+    box-shadow: 0px 0px 4px 1px #d5d5d5;
+}
+.carouselImg{
+    height: 300px;
+}
+.carouselText{
+    color: #224455;
+    margin-top: 15px;
+    font-size: 30px;
+}
+.carouselText2{
+    color: #78C2A4;
+    font-size: 19px;
+    cursor: pointer;
+    text-align: right;
+    margin-right: 25px;
+    margin-bottom: 25px;
+}
+.carousel .thumb{
+    display: none;
+}
+.carousel .thumb.selected, .carousel .thumb:hover {
+    border: 3px solid #333;
+    display: none;
+}
+.mt-mb-30 {
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.centerheading {
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+.horizontal-Line {
+    width: 20px;
+    border-bottom: 3px solid $primary-color;
+    margin-bottom: 0px;
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+.text1 {
+    font-size: $TitleSize;
+    color: #484848;
+}
+
+.primarycolor {
+    color: $primary-color;
+}
+
+.primarybackgroundcolor {
+    background-color: $primary-color;
+}
+
+.ExploreBtn {
+
+    color: $primary-color;
+    background-color: #fff;
+    border: 2px solid $primary-color;
+    font-family: poppins;
+    font-weight: 900;
+    height: 60px;
+    width: 230px;
+    font-size: 18px;
+    margin: 40px 0px;
+}
+
+.ExploreBtn:hover {
+    color: #fff;
+    background-color: $primary-color;
+    border: none;
+
+}
+
+.ExploreBtn:focus {
+    opacity: 0.8;
+    outline: none;
+    border: 2px solid $primary-color;
+
+}
+
+//section1
+.section1 {
+
+    .text2 {
+        font-size: 16px;
+        color: #484848;
+        line-height: 2.5;
+    }
+
+    .heading {
+        font-size: $HeadingSize;
+        color: #214354;
+
+    }
+
+    .btn {
+        height: 50px;
+        width: 155px;
+        border: none;
+        background: none;
+        font-size: 16px;
+        font-family: poppins;
+        font-weight: 600;
+        text-decoration: underline;
+        color: $primary-color;
+    }
+
+    .btn:hover {
+        background: $primary-color;
+        color: white;
+        text-decoration: none;
+    }
+}
+
+//section 2
+.section2 {
+    .heading {
+        font-size: $HeadingSize;
+        color: #214354;
+    }
+
+    .text2 {
+        font-size: 16px;
+        color: #484848;
+        line-height: 2.5;
+    }
+
+    .deal-card {
+
+        width: 96%;
+        margin-left: auto;
+        margin-right: auto;
+        box-shadow: 0px 0px 3px 2px #efeded;
+        border-radius: 15px;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        padding: 50px 30px;
+        color: #214354;
+
+    }
+
+    .deal-card:hover {
+        color: white;
+        background-color: #8fe2c1;
+
+        .readmore {
+            color: #fff;
+
+        }
+    }
+
+    .deal-card-heading {
+        font-size: 24px;
+    }
+
+    .deal-card-text {
+        font-size: 13px;
+        line-height: 2;
+    }
+
+    .readmore {
+
+        font-size: 16px;
+        font-family: poppins;
+        font-weight: 600;
+        text-decoration: underline;
+        color: $primary-color;
+        text-align: left;
+        padding-left: 0px;
+    }
+
+    .readmore:hover {
+        cursor: pointer;
+        opacity: 0.8;
+    }
+
+
+
+}
+
+//section 3
+.section3 {
+    .Section3Card {
+        background-color: #214354;
+        color: white;
+        height: 645px;
+        width: 90%;
+        border-radius: 20px;
+        padding: 50px;
+    }
+
+    .horizontal-Line {
+        width: 20px;
+        border-bottom: 3px solid #fff;
+        margin-bottom: 0px;
+        margin-right: 10px;
+        margin-left: 10px;
+    }
+
+    .text1 {
+        font-size: $TitleSize;
+        color: white;
+    }
+
+    .heading {
+        font-size: $HeadingSize;
+        color: #fff;
+
+    }
+
+    .text2 {
+        font-size: 16px;
+    }
+
+    .section3InnerCard {
+
+        background: white;
+        /* height: 432px; */
+        width: 386px;
+        box-shadow: 0px 0px 1px 1px #bebebe;
+        border-radius: 33px;
+        margin-top: 23%;
+        margin-left: 100px;
+        padding: 17px;
+
+
+    }
+
+    .BuyNowBtn {
+
+        color: #214354;
+        background-color: #fff;
+        border: 2px solid #214354;
+        font-family: poppins;
+        font-weight: 900;
+        height: 60px;
+        width: 230px;
+        font-size: 18px;
+        margin: 40px 0px;
+    }
+
+    .BuyNowBtn:hover {
+        color: #fff;
+        background-color: #34708f;
+        border: 3px solid #002334;
+
+    }
+
+    .BuyNowBtn:focus {
+        opacity: 0.8;
+        outline: none;
+        border: 3px solid #002334;
+
+    }
+}
+
+.section4 {
+    .newArrival {
+        color: #D5BA74;
+        font-size: 12px;
+        position: absolute;
+        left: 50px;
+        top: 50px;
+    }
+
+    .heading {
+        font-size: $HeadingSize;
+        color: #214354;
+    }
+
+    .text2 {
+        font-size: 16px;
+        color: #484848;
+        line-height: 2.5;
+    }
+
+    .ExploreCard {
+        padding: 50px;
+        width: 100%;
+        background: white;
+        border-radius: 20px;
+        box-shadow: 0px 0px 4px 1px #d5d5d5;
+        text-align: center;
+        margin-top: 15px;
+        margin-bottom: 15px;
+    }
+
+    .overlayy {
+
+        position: absolute;
+        top: 15px;
+        bottom: 0;
+        left: 15px;
+        right: auto;
+        height: calc(100% - 30px);
+        width: calc(100% - 30px);
+        opacity: 0;
+        transition: .5s ease;
+        background-color: $primary-color;
+        border-radius: 20px;
+        padding: 50px;
+
+    }
+
+    .ExploreCard:hover .overlayy {
+        opacity: 1;
+        cursor: pointer;
+    }
+
+    .ExploreCardtext1 {
+        font-size: 24px;
+    }
+
+    .ExploreCardtext2 {
+        font-size: 18px;
+    }
+
+    .ExploreCardtext3 {
+        font-size: 24px;
+        color: $primary-color;
+    }
+
+    .ExploreCardtext4 {
+        font-size: 24px;
+        color: #fff;
+        position: absolute;
+        bottom: 15%;
+        left: 0;
+        right: 0;
+        text-align: center;
+    }
+
+    .ExploreCardImg {
+        height: 150px;
+        width: 150px;
+    }
+}
+
+.section5 {
+    .categoryCard {
+        padding: 40px 10px;
+        width: 100%;
+        background: white;
+        border-radius: 20px;
+        box-shadow: 0px 0px 4px 1px #d5d5d5;
+        text-align: center;
+        margin-top: 15px;
+        margin-bottom: 15px;
+    }
+
+    .categoryCard:hover {
+        background: $primary-color;
+        color: white;
+    }
+
+    .categoryCardtext1 {
+        font-size: 28px;
+    }
+
+    .categoryCardtext2 {
+        font-size: 18px;
+    }
+
+    .categoryCardtext3 {
+        font-size: 16px;
+        text-decoration: underline;
+        cursor: pointer;
+    }
+}
+
+.section6 {
+    .text2 {
+        font-size: 16px;
+        color: #484848;
+        line-height: 2.5;
+    }
+
+    .heading {
+        font-size: $HeadingSize;
+        color: #214354;
+
+    }
+
+    .testimoninalCard {
+        box-shadow: 0px 0px 4px 1px #d5d5d5;
+        height: 130px;
+        padding: 24px 20px;
+        margin: 20px 0px ;
+
+
+    }
+
+    .testimoninalCardText1 {
+        color: #214354;
+        font-size: 18px;
+    }
+
+    .testimoninalCardText2 {
+        color: #949494;
+        font-size: 18px;
+
+    }
+    .text3{
+        font-size: 16px;
+        line-height: 1.9;
+    }
+    
+    
+}
+
+.section7{
+    .heading {
+        font-size: $HeadingSize;
+        color: #214354;
+
+    }
+}
+.section8{
+    .text2 {
+        font-size: 16px;
+        color: #484848;
+        line-height: 1.6;
+    }
+
+    .heading {
+        font-size: $HeadingSize;
+        color: #214354;
+
+    }
+}

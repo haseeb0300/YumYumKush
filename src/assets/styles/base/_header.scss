@@ -1,0 +1,32 @@
+$primary-color: #78C2A4;
+
+.DesktopHeader{
+    .headerTabs{
+        font-size: 16px;
+        color: #214354;
+        font-family: poppins;
+        font-weight: 400;
+        margin-bottom: 0px;
+
+    }
+    .headerTabs:hover{
+        color: #273538;
+        cursor: pointer;
+        font-family: poppins;
+        font-weight: 600;
+        margin-bottom: 0px;
+    }
+    .header_btn{
+        height: 60px;
+        width: 200px;
+        font-size: 16px;
+        color: $primary-color;
+        background: white;
+        border: 2px solid $primary-color;
+        border-radius: 2px;
+    }
+    .header_btn:hover{
+        background: $primary-color;
+        color: white;
+    }
+}
