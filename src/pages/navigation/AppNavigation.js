@@ -3,9 +3,8 @@ import { connect } from 'react-redux';
 
 import ScrollToTop from '../../utils/ScrollToTop';
 import Dashboard from '../Dashboard/Dashboard';
-import About from '../Dashboard/About';
-import Faq from '../Contact/Faq';
-import Contact from '../Contact/Contact';
+import Product from '../Product/Product';
+
 
 
 
@@ -80,14 +79,10 @@ class AppNavigation extends Component {
                     <Route exact path="/"
                         component={Dashboard} />
 
-                          <Route exact path="/about"
-                        component={About} />
+                        
 
-                          <Route exact path="/faq"
-                        component={Faq} />
-
-                          <Route exact path="/contact"
-                        component={Contact} />
+                          <Route exact path="/product"
+                        component={Product} />
                    
                    
                         

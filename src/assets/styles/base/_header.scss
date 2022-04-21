@@ -30,3 +30,8 @@ $primary-color: #78C2A4;
         color: white;
     }
 }
+@media (max-width: 767px) {
+    .DesktopHeader{
+        display: none;
+    }
+}

@@ -365,6 +365,16 @@ $TitleSize : 14px;
         margin-top: 15px;
         margin-bottom: 15px;
     }
+    .heading {
+        font-size: $HeadingSize;
+        color: #214354;
+
+    }
+    .text2 {
+        font-size: 16px;
+        color: #484848;
+        line-height: 2.5;
+    }
 
     .categoryCard:hover {
         background: $primary-color;
@@ -481,3 +491,182 @@ $TitleSize : 14px;
 
     }
 }
+@media (max-width: 767px) {
+    .section1 {
+        .heading{
+            font-size: 25px;
+        }
+    }
+    .section2 {
+        .heading{
+            font-size: 25px;
+        }
+    }
+    .section3 {
+        .heading{
+            font-size: 25px;
+        }
+        .section3InnerCard{
+            display: none;
+        }
+        .Section3Card{
+            width: 100%;
+        }
+    }
+    .section4 {
+        .heading{
+            font-size: 25px;
+        }
+    }
+    .section5 {
+        .heading{
+            font-size: 25px;
+        }
+    }
+    .section6 {
+        .heading{
+            font-size: 25px;
+        }
+    }
+    .section7 {
+        .heading{
+            font-size: 25px;
+        }
+    }
+    .section8 {
+        .heading{
+            font-size: 25px;
+        }
+    }
+
+}
+@media (max-width: 576px) {
+    .section1 {
+        .heading{
+            font-size: 25px;
+            text-align: center;
+        }
+    }
+    .section2 {
+        .heading{
+            font-size: 25px;
+            text-align: center;
+
+        }
+        .deal-card{
+            text-align: center;
+            width: 100%;
+        }
+        .readmore{
+            text-align: center;
+        }
+    }
+    .section3 {
+        .heading{
+            font-size: 25px;
+            text-align: center;
+
+        }
+        .section3InnerCard{
+            display: none;
+        }
+        .Section3Card{
+            width: 100%;
+            text-align: center;
+            padding: 50px 10px;
+
+        }
+    }
+    .section4 {
+        .heading{
+            font-size: 25px;
+            text-align: center;
+
+        }
+    }
+    .section5 {
+        .heading{
+            font-size: 25px;
+            text-align: center;
+
+        }
+    }
+    .section6 {
+        .heading{
+            font-size: 25px;
+            text-align: center;
+
+        }
+        .text3 {
+         
+            text-align: center;
+        }
+    }
+    .section7 {
+        .heading{
+            font-size: 25px;
+            text-align: center;
+
+        }
+    }
+    .section8 {
+        .heading{
+            font-size: 25px;
+            text-align: center;
+
+        }
+        .subscribebtn {
+            height: 45px;
+       position: relative;
+            width: 100%;
+            background: #78C2A4;
+            color: white;
+            border: none;
+            font-size: 14px;
+            font-weight: 900;
+            font-family: 'Poppins';
+            margin-top: 17px;
+            right: 0px;
+            top: 0px;
+        }
+        .subscribeInput {
+            border: none;
+            height: 60px;
+            background: #f1f9f6;
+            width: 100%;
+            margin-top: 40px;
+            font-size: 15px;
+            font-family: 'Poppins';
+            font-weight: 300;
+            color: #414141;
+            padding-left: 48px;
+            padding-right: 0px;
+        }
+        .envopleImg {
+            position: absolute;
+            top: 57px;
+            left: 9%;
+        }
+    }
+    .text1 {
+        font-size: 18px;
+        text-align: center;
+      
+    }
+    .carouselText {
+        color: #224455;
+        margin-top: 15px;
+        font-size: 15px;
+        padding: 18px;
+    }
+    .section{
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+    .centerheading {
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+

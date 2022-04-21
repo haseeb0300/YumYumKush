@@ -47,3 +47,27 @@ $primary-color: #78C2A4;
     margin-bottom: 10px;
     border-top: 2px solid white;
 }
+@media (max-width: 576px) {
+    .footerTop {
+        height: 74px;
+        object-position: top;
+        object-fit: cover;
+    }
+    .footerNav{
+        text-align: center;
+    }
+    .footerNavItem {
+        font-size: 17px;
+        text-align: center;
+    }
+    .footerText1 {
+        font-size: 16px;
+        margin-top: 25px;
+    }
+    .footerMid {
+        background-color: #78C2A4;
+        padding: 50px 20px;
+        color: white;
+    }
+    
+}

@@ -1,0 +1,113 @@
+$primary-color: #78C2A4;
+
+    @keyframes modalFade {
+        from {transform: translateY(-50%);opacity: 0;}
+        to {transform: translateY(0);opacity: 1;}
+      }
+      
+     
+      .modal-open .modal-dialog {
+        right:-15px;
+            -webkit-transition: opacity 0.3s linear, right 0.3s ease-out;
+               -moz-transition: opacity 0.3s linear, right 0.3s ease-out;
+                 -o-transition: opacity 0.3s linear, right 0.3s ease-out;
+                    transition: opacity 0.3s linear, right 0.3s ease-out;
+    }
+  
+    .sideCart{
+
+    .modal-content {
+        height: 100vh;
+       width: 490px;
+       position: fixed;
+       top: 0px;
+       right: 0px;
+       height: 100vh;
+       -webkit-transform: translate3d(0%, 0, 0);
+       -ms-transform: translate3d(0%, 0, 0);
+        -o-transform: translate3d(0%, 0, 0);
+           transform: translate3d(0%, 0, 0);
+       background: #FAFBFE;
+    }
+}
+.cartTop{
+    background-color: $primary-color;
+    font-size: 16px;
+    color: white;
+    padding: 20px 40px;
+}
+.CartItemCard{
+
+    background-color: white;
+    box-shadow: 0px 0px 4px 1px #d5d5d5;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 20px 10px;
+}
+.CartItemCardtext1{
+    font-size: 18px;
+
+}
+.CartItemCardtext2{
+    color: $primary-color;
+    font-size: 18px;
+
+
+    
+}
+.addBtn{
+    height: 30px;
+    width: 30px;
+    font-size: 12px;
+    line-height: 31px;
+    border: none;
+    background-color: #E6E6E6;
+    text-align: center;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+.CartBottom{
+    background-color: white;
+    box-shadow: 0px 0px 4px 1px #d5d5d5;
+    
+    padding: 20px 10px;
+}
+.CartBottomText1{
+    font-size: 18px;
+    color: #273538;
+}
+.CartBottomText2{
+    font-size: 26px;
+    color: $primary-color;
+}
+.CartMid{
+    
+    height: 73vh;
+    overflow: auto;
+
+}
+.Paynowbtn {
+
+    color: $primary-color;
+    background-color: #fff;
+    border: 2px solid $primary-color;
+    font-family: poppins;
+    font-weight: 900;
+    height: 60px;
+    width: 230px;
+    font-size: 18px;
+}
+
+.Paynowbtn:hover {
+    color: #fff;
+    background-color: $primary-color;
+    border: none;
+
+}
+
+.Paynowbtn:focus {
+    opacity: 0.8;
+    outline: none;
+    border: 2px solid $primary-color;
+
+}
