@@ -9,6 +9,8 @@ import store from '../store/store';
 import '../assets/styles/base/_style.scss'
 import '../assets/styles/base/_header.scss'
 import '../assets/styles/base/_dashboard.scss'
+import '../assets/styles/base/_footer.scss'
+
 
 
 

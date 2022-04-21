@@ -445,4 +445,39 @@ $TitleSize : 14px;
         color: #214354;
 
     }
+    .subscribeInput{
+        border: none;
+        height: 60px;
+        background: #f1f9f6;
+        width: 70%;
+        margin-top: 40px;
+        font-size: 18px;
+        font-family: 'Poppins';
+        font-weight: 300;
+        color: #414141;
+        padding-left: 80px;
+        padding-right: 212px;
+
+    }
+    .envopleImg{
+        
+    position: absolute;
+    top: 57px;
+    left: 19%;
+
+    }
+    .subscribebtn{
+        height: 45px;
+        position: absolute;
+        right: 18%;
+        top: 47px;
+        width: 177px;
+        background: $primary-color;
+        color: white;
+        border: none;
+        font-size: 14px;
+        font-weight: 900;
+        font-family: 'Poppins';
+
+    }
 }
