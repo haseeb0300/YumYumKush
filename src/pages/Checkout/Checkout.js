@@ -148,22 +148,62 @@ class Checkout extends Component {
                                         <div></div>
                                         <div className='col-12'>
 
-                                        <div className='CartItemCard'>
-                                            <div className='col-12'>
-                                                <div className='row'>
-                                                  
-                                                    <div className='col-12 my-auto'>
-                                                        <p className='poppins_bold CartItemCardtext1'>God's Gift Indica</p>
-                                                        <p className='poppins_semibold CartItemCardtext2'>$ 50.00</p>
-                                                    </div>
-                                                  
-                                                </div>
-                                            </div>
+                                            <div className='CartItemCard'>
+                                                <div className='col-12'>
+                                                    <div className='row'>
 
-                                        </div>
+                                                        <div className='col-12 my-auto'>
+                                                            <p className='poppins_bold CartItemCardtext1'>God's Gift Indica</p>
+                                                            <p className='poppins_semibold CartItemCardtext2'>$ 50.00</p>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
                                         </div>
                                     </div>
 
+                                    <div className='GrandTotalCard'>
+                                        <div className='col-12'>
+                                      
+                                        <div className='col-12'>
+
+
+                                            <div className='col-12 my-auto'>
+                                                <div className='row'>
+                                                    <div className='col-8'>
+                                                        <p className='poppins_bold CartItemCardtext1'>Grand Total </p>
+
+                                                    </div>
+                                                    <div className='col-4 text-right'>
+                                                        <p className='poppins_semibold CartItemCardtext2'>$ 50.00</p>
+
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+                                            <div className='col-md-12'>
+                                                        <div className='row'>
+                                                            <div className='col-1 '>
+                                                                <input type="checkbox" name="privacy" value="privacy" /> 
+
+
+                                                            </div>
+                                                            <div className='col-10 '>
+                                                                <p className='poppins_regular BillingCardLabel'>Please check to acknowledge our<label className='primarycolor'>Privacy & Terms Policy</label> </p>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div className='col-md-12 text-center mt-3'>
+                                                    <button className='Paynowbtn'>Pay $3,439.00</button>
+                                                    </div>
+                                        </div>
+                                        </div>
+                                    </div>
+                                    
                                 </div>
                             </div>
                         </div>
