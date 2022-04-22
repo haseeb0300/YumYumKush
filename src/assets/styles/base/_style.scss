@@ -5,6 +5,14 @@
     src: url('../../fonts/poppins/Poppins-Thin.ttf') format('truetype');
     font-weight: 100;
   }
+  @font-face {
+    font-family: 'CreamCake';
+    font-style: normal;
+
+    src: url('../../fonts/Cream\ Cake.otf') format('truetype');
+    font-weight: 500;
+  }
+
 
   .loader-large{
     border: 16px solid #f3f3f3; /* Light grey */

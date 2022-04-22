@@ -4,10 +4,14 @@ $primary-color: #78C2A4;
     position: sticky;
     top: 0;
     z-index: 2;
-    background: white;
+    background: black;
     .backwhite{
         box-shadow: 0px 0px 6px 3px #d7d4d4;
-        background-color: white;
+        background-color: black;
+    }
+    .logoimg{
+        height: 146px;
+        object-fit: cover;
     }
     .pt-pb-30{
         padding-top: 30px;

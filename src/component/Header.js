@@ -46,11 +46,11 @@ class Contact extends Component {
 
             {/* headerDesktop Start */}
             <div className='DesktopHeader'>
-               <div className='col-md-12 pt-pb-30 backwhite'>
+               <div className='col-md-12  backwhite'>
                   <div className='row'>
                      <div className='col-md-2 text-center'>
                         <Link to="/">
-                           <img className='w-100' src={Logo} />
+                           <img className='w-100 logoimg' src={Logo} />
                         </Link>
                      </div>
                      <div className='col-md-7 my-auto'>
