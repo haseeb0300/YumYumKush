@@ -198,7 +198,10 @@ class Checkout extends Component {
                                                         </div>
                                                     </div>
                                                     <div className='col-md-12 text-center mt-3'>
+                                                    <Link to="/feedback">
+
                                                     <button className='Paynowbtn'>Pay $3,439.00</button>
+                                                  </Link>
                                                     </div>
                                         </div>
                                         </div>

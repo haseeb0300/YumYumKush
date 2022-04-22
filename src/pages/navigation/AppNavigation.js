@@ -5,6 +5,7 @@ import ScrollToTop from '../../utils/ScrollToTop';
 import Dashboard from '../Dashboard/Dashboard';
 import Product from '../Product/Product';
 import Checkout from '../Checkout/Checkout';
+import Feedback from '../Feedback/Feedback';
 
 
 
@@ -87,8 +88,10 @@ class AppNavigation extends Component {
                    
                    <Route exact path="/checkout"
                         component={Checkout} />
+                       <Route exact path="/feedback"
+                        component={Feedback} />
                    
-
+                   
                 </Switch>
                 </ScrollToTop>
 

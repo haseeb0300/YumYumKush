@@ -5,7 +5,7 @@ import { Carousel } from 'react-responsive-carousel'
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Link, withRouter } from 'react-router-dom';
 
-import Logo from '../assets/images/header/Logo.svg'
+import Logo from '../assets/images/header/Logo.png'
 import Cart from '../assets/images/header/Cart.svg'
 
 
@@ -50,7 +50,7 @@ class Contact extends Component {
                   <div className='row'>
                      <div className='col-md-2 text-center'>
                         <Link to="/">
-                           <img src={Logo} />
+                           <img className='w-100' src={Logo} />
                         </Link>
                      </div>
                      <div className='col-md-7 my-auto'>

@@ -1,0 +1,57 @@
+.FilterCategory{
+    padding: 30px;
+    .heading{
+        font-size: 16px;
+        
+    }
+    .tilte{
+        font-size: 14px;
+        margin-left: 10px;
+
+    }
+   
+}
+.productPage{
+    margin-top: 40px;
+}
+.FeedBackContainer{
+    text-align: center;
+    .FeedBackCard{
+        box-shadow: 0px 0px 3px 2px #efeded;
+padding: 50px;
+background-color: white;
+margin: 50px;
+    }
+    .FeedBackCardHeading{
+        font-size: 36px;
+    }
+    .FeedBackCardText{
+        font-size: 15px;
+    }
+    .BillingCardLabel{
+        color: #828282;
+        margin-bottom: 0px;
+        font-size: 18px;
+        margin-top: 30px;
+        text-align: left;
+    }
+    .BillingCardTextArea{
+        height: 120px;
+        width: 100%;
+        border: 1px solid #828282;
+        border-radius: 5px;
+        padding-left: 15px;
+        font-family: 'Poppins';
+        font-weight: 400;
+        font-size: 15px;
+        margin-top: 10px;
+        padding-top: 15px;
+        margin-bottom: 10px;
+    }
+    
+    .BillingCardTextArea:focus{
+        border: 2px solid #828282;
+        outline: none;
+
+    }
+}

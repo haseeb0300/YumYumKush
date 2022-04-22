@@ -12,6 +12,8 @@ import '../assets/styles/base/_dashboard.scss'
 import '../assets/styles/base/_footer.scss'
 import '../assets/styles/base/_sidecart.scss'
 import '../assets/styles/base/_checkout.scss'
+import '../assets/styles/base/_product.scss'
+
 
 
 

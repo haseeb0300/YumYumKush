@@ -62,8 +62,14 @@ class Dashboard extends Component {
                         <p className='text1 poppins_regular'><label className='horizontal-Line'></label>All types of herbal products</p>
                         <p className='heading poppins_bold'>WE HELP <label className='primarycolor'> PEOPLE</label> ELEVATE THEIR HAPPINESS.</p>
                         <p className='text2 poppins_regular'>We strive to provide every customer with a great delivery experience, as well as pride ourselves in having a variety of THC and CBD products to choose from that can be delivered straight to you.</p>
+                        <Link to="/product">
+
                         <button className='btn primarycolor'>Buy Now</button>
+                        </Link>
+                        <Link to="/product">
+
                         <button className='btn primarycolor'>Explore More</button>
+                        </Link>
 
                      </div>
                      <div className='col-md-5'>
@@ -195,7 +201,10 @@ class Dashboard extends Component {
                   </div>
                </div>
                <div className='col-md-12 text-center'>
+               <Link to="/product">
+
                   <button className='ExploreBtn'>Explore More</button>
+                  </Link>
                </div>
 
             </section>
@@ -414,7 +423,10 @@ class Dashboard extends Component {
 
 
                <div className='col-md-12 text-center'>
+               <Link to="/product">
+
                   <button className='ExploreBtn'>Explore More</button>
+                  </Link>
                </div>
 
             </section>
