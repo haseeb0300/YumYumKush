@@ -19,6 +19,7 @@ import TestimonialImg3 from '../../assets/images/dashboard/section6/3.png'
 import slider1 from '../../assets/images/dashboard/section7/1.png'
 import Logo from '../../assets/images/header/Logo.svg'
 import envolpe from '../../assets/images/dashboard/section7/envolpe.png'
+import { Link, withRouter } from 'react-router-dom';
 
 import Footer from '../../component/Footer'
 
@@ -54,7 +55,7 @@ class Dashboard extends Component {
          <>
             <Header />
             {/* section1 */}
-            <section className='container section1'>
+            <section id="Home" className='container section1'>
                <div className='col-md-12 mt-mb-30'>
                   <div className='row'>
                      <div className='col-md-7'>
@@ -332,7 +333,10 @@ class Dashboard extends Component {
                </div>
 
                <div className='col-md-12 text-center'>
+               <Link to="/product">
+
                   <button className='ExploreBtn'>Explore More</button>
+                  </Link>
                </div>
 
             </section>
@@ -416,7 +420,7 @@ class Dashboard extends Component {
             </section>
             {/* section5 end */}
             {/* section6 start */}
-            <section className='container section6'>
+            <section id="Feedback" className='container section6'>
                <div className='col-md-12 mt-mb-30'>
                   <div className='row'>
                      <div className='col-md-7'>
@@ -492,7 +496,7 @@ class Dashboard extends Component {
 
             {/* section6 end */}
             {/* section7 start */}
-            <section className='container section7'>
+            <section id="Rewards" className='container section7'>
                <div className='col-md-12 mt-mb-30'>
                   <div className='row'>
                      <div className='col-md-7'>
@@ -536,7 +540,7 @@ class Dashboard extends Component {
             {/* section8 start */}
 
 
-            <section className='container section8'>
+            <section id="About"  className='container section8'>
                <div className='col-md-12 mt-mb-30 text-center'>
                   <div className='centerheading'>
                      <p className='text1 poppins_regular'><label className='horizontal-Line'></label> ABOUT US <label className='horizontal-Line'></label></p>
@@ -558,7 +562,7 @@ class Dashboard extends Component {
             {/* section9 start */}
 
 
-            <section className='container section8'>
+            <section id="Contact" className='container section8'>
                <div className='col-md-12 mt-mb-30 text-center'>
                   <div className='centerheading'>
                      <p className='text1 poppins_regular'><label className='horizontal-Line'></label> SUBSCRIBE NOW <label className='horizontal-Line'></label></p>

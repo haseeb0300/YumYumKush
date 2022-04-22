@@ -39,6 +39,9 @@ class Product extends Component {
    componentDidMount() {
 
    }
+   handleClose = ()=>{
+      this.setState({showModal : false})
+  }
 
 
 

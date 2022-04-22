@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import ScrollToTop from '../../utils/ScrollToTop';
 import Dashboard from '../Dashboard/Dashboard';
 import Product from '../Product/Product';
+import Checkout from '../Checkout/Checkout';
 
 
 
@@ -84,8 +85,9 @@ class AppNavigation extends Component {
                           <Route exact path="/product"
                         component={Product} />
                    
+                   <Route exact path="/checkout"
+                        component={Checkout} />
                    
-                        
 
                 </Switch>
                 </ScrollToTop>

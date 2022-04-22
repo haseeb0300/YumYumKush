@@ -1,0 +1,91 @@
+$primary-color: #78C2A4;
+$HeadingSize: 45px;
+$TitleSize : 14px;
+.checkoutContainer{
+    .heading {
+        font-size: $HeadingSize;
+        color: #214354;
+    }
+    .BillingCard{
+        box-shadow: 0px 0px 3px 2px #efeded;
+        border-radius: 15px;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        padding: 50px 30px;
+        color: #000;
+        height: 600px;
+    
+    }
+    .OrderCard{
+        box-shadow: 0px 0px 3px 2px #efeded;
+        border-radius: 15px;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        padding: 50px 20px;
+        color: #000;
+    }
+    .PaymentCard{
+        box-shadow: 0px 0px 3px 2px #efeded;
+        border-radius: 15px;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        padding: 50px 30px;
+        color: #000;
+        height: 357px;
+    
+    }
+    .PaymentInnerCard{
+        box-shadow: 0px 0px 3px 2px #efeded;
+        border-radius: 15px;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        padding: 50px 30px;
+        color: #000;
+        height: 138px;
+    
+    }
+    .BillingCardTitle{
+        font-size: 19px;
+        margin-top: -20px;
+
+    }
+    .BillingCardLabel{
+        color: #828282;
+        margin-bottom: 0px;
+        font-size: 13px;
+    }
+    .BillingCardLabel2 {
+        color: #828282;
+        margin-bottom: 0px;
+        font-size: 10px;
+    }
+    .lockimg{
+        height: 28px;
+
+
+    }
+    .BillingCardInput{
+        height: 45px;
+        width: 100%;
+        border: 1px solid #828282;
+        border-radius: 5px;
+        padding-left: 15px;
+        font-family: 'Poppins';
+        font-weight: 400;
+        font-size: 14px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+    .BillingCardInput:focus{
+        border: 2px solid #828282;
+        outline: none;
+
+    }
+    .RadioLabel{
+        font-size: 19px;
+        margin-left: 9px;
+        font-family: 'Poppins';
+        font-weight: 700;
+    }
+
+}

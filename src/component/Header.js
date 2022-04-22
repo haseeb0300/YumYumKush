@@ -46,32 +46,48 @@ class Contact extends Component {
 
             {/* headerDesktop Start */}
             <div className='DesktopHeader'>
-               <div className='col-md-12 mt-mb-30'>
+               <div className='col-md-12 pt-pb-30 backwhite'>
                   <div className='row'>
                      <div className='col-md-2 text-center'>
-
-                        <img src={Logo} />
+                        <Link to="/">
+                           <img src={Logo} />
+                        </Link>
                      </div>
                      <div className='col-md-7 my-auto'>
                         <div className='col-md-12'>
                            <div className='row'>
                               <div className='col-md-2 text-center'>
-                                 <p className=' headerTabs'>Home</p>
+                                 <Link to="/">
+
+                                    <p className=' headerTabs'>Home</p>
+                                 </Link>
                               </div>
                               <div className='col-md-2 text-center'>
                                  <p className=' headerTabs'>Store</p>
                               </div>
                               <div className='col-md-2 text-center'>
-                                 <p className=' headerTabs'>Rewards</p>
+                                 <a href="#Rewards">
+
+                                    <p className=' headerTabs'>Rewards</p>
+                                 </a>
                               </div>
                               <div className='col-md-2 text-center'>
-                                 <p className=' headerTabs'>Contact</p>
+                                 <a href="#Contact">
+
+                                    <p className=' headerTabs'>Contact</p>
+                                 </a>
                               </div>
                               <div className='col-md-2 text-center'>
-                                 <p className=' headerTabs'>About</p>
+                                 <a href="#About">
+
+                                    <p className=' headerTabs'>About</p>
+                                 </a>
                               </div>
                               <div className='col-md-2 text-center'>
-                                 <p className=' headerTabs'>Feedback</p>
+                                 <a href="#Feedback">
+
+                                    <p className=' headerTabs'>Feedback</p>
+                                 </a>
                               </div>
 
 
@@ -82,8 +98,10 @@ class Contact extends Component {
                      <div className='col-md-3 my-auto'>
                         <div className='row'>
                            <div>
-                              <button className='header_btn'>Explore Product</button>
+                              <Link to="/product">
 
+                                 <button className='header_btn'>Explore Product</button>
+                              </Link>
                            </div>
                            <div className='my-auto ml-4 mr-4'>
                               <img src={Cart} />
