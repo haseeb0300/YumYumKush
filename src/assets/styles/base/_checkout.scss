@@ -4,7 +4,7 @@ $TitleSize : 14px;
 .checkoutContainer{
     .heading {
         font-size: $HeadingSize;
-        color: #214354;
+        color: whitesmoke;
     }
     .BillingCard{
         box-shadow: 0px 0px 3px 2px #efeded;
@@ -56,6 +56,7 @@ $TitleSize : 14px;
     .BillingCardTitle{
         font-size: 19px;
         margin-top: -20px;
+        color: whitesmoke;
 
     }
     .BillingCardLabel{
@@ -95,6 +96,7 @@ $TitleSize : 14px;
         margin-left: 9px;
         font-family: 'Poppins';
         font-weight: 700;
+        color: white;
     }
 
 }

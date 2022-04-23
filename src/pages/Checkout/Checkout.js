@@ -153,7 +153,7 @@ class Checkout extends Component {
                                                     <div className='row'>
 
                                                         <div className='col-12 my-auto'>
-                                                            <p className='poppins_bold CartItemCardtext1'>God's Gift Indica</p>
+                                                            <p className='poppins_bold '>God's Gift Indica</p>
                                                             <p className='poppins_semibold CartItemCardtext2'>$ 50.00</p>
                                                         </div>
 
@@ -173,7 +173,7 @@ class Checkout extends Component {
                                             <div className='col-12 my-auto'>
                                                 <div className='row'>
                                                     <div className='col-8'>
-                                                        <p className='poppins_bold CartItemCardtext1'>Grand Total </p>
+                                                        <p className='poppins_bold BillingCardTitle'>Grand Total </p>
 
                                                     </div>
                                                     <div className='col-4 text-right'>

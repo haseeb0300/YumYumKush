@@ -6,7 +6,7 @@ import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a lo
 import { Link, withRouter } from 'react-router-dom';
 
 import footer from '../assets/images/footer/footer.png'
-import footerlogo from '../assets/images/footer/logo.png'
+import footerlogo from '../assets/images/header/Logo.png'
 import socialMedia1 from '../assets/images/footer/1.png'
 import socialMedia2 from '../assets/images/footer/2.png'
 import socialMedia3 from '../assets/images/footer/3.png'
@@ -55,7 +55,7 @@ class Footer extends Component {
                         <div className='col-md-12 pb-5'>
                            <div className='row'>
                               <div className='col-md-5 text-center'>
-                                 <img src={footerlogo} />
+                                 <img className='footerlogo' src={footerlogo} />
                                  <p className='footerText1 poppins_regular'>support@yumyumkush.com</p>
                                  <button className='socialMediaContainer'>
                                     <img src={socialMedia1} />

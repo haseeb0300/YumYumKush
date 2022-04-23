@@ -17,7 +17,7 @@ import TestimonialImg1 from '../../assets/images/dashboard/section6/1.png'
 import TestimonialImg2 from '../../assets/images/dashboard/section6/2.png'
 import TestimonialImg3 from '../../assets/images/dashboard/section6/3.png'
 import slider1 from '../../assets/images/dashboard/section7/1.png'
-import Logo from '../../assets/images/header/Logo.svg'
+import Logo from '../../assets/images/header/Logo.png'
 import envolpe from '../../assets/images/dashboard/section7/envolpe.png'
 import { Link, withRouter } from 'react-router-dom';
 
@@ -562,7 +562,7 @@ class Dashboard extends Component {
                         Our products are handpicked by our highly knowledgeable cannabis curators and we also offer accessories that compliment our cannabis for your experience.
                         We value integrity and quality in our products and are dedicated to providing the best quality cannabis products we can find for our consumer's medical needs and/or recreational experience.</p>
 
-                     <img className='mt-5' src={Logo} />
+                     <img className='mt-5 logoimg ' src={Logo} />
                   </div>
                </div>
 

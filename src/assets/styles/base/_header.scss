@@ -19,14 +19,14 @@ $primary-color: #78C2A4;
     }
     .headerTabs{
         font-size: 16px;
-        color: #214354;
+        color: #fff;
         font-family: poppins;
         font-weight: 400;
         margin-bottom: 0px;
 
     }
     .headerTabs:hover{
-        color: #273538;
+        color: #fff;
         cursor: pointer;
         font-family: poppins;
         font-weight: 600;
@@ -36,9 +36,9 @@ $primary-color: #78C2A4;
         height: 60px;
         width: 200px;
         font-size: 16px;
-        color: $primary-color;
-        background: white;
-        border: 2px solid $primary-color;
+        color: white;
+        background: black;
+        border: 2px solid white;
         border-radius: 2px;
     }
     .header_btn:hover{

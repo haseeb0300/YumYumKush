@@ -5,19 +5,19 @@ $TitleSize : 14px;
 //carsole
 .carousel .slide {
    
-    background: #fff; 
+    background: #000; 
     box-shadow: 0px 0px 4px 1px #d5d5d5;
 
 }
 .carouselCard{
-    background: #fff; 
-    box-shadow: 0px 0px 4px 1px #d5d5d5;
+    background: #000; 
+    // box-shadow: 0px 0px 4px 1px #d5d5d5;
 }
 .carouselImg{
     height: 300px;
 }
 .carouselText{
-    color: #224455;
+    color: whitesmoke;
     margin-top: 15px;
     font-size: 30px;
 }
@@ -27,7 +27,7 @@ $TitleSize : 14px;
     cursor: pointer;
     text-align: right;
     margin-right: 25px;
-    margin-bottom: 25px;
+    margin-bottom: 0px;
 }
 .carousel .thumb{
     display: none;
@@ -58,7 +58,7 @@ $TitleSize : 14px;
 
 .text1 {
     font-size: $TitleSize;
-    color: #484848;
+    color: #fff;
 }
 
 .primarycolor {
@@ -71,9 +71,9 @@ $TitleSize : 14px;
 
 .ExploreBtn {
 
-    color: $primary-color;
-    background-color: #fff;
-    border: 2px solid $primary-color;
+    color: #fff;
+    background-color: #000;
+    border: 2px solid white;
     font-family: poppins;
     font-weight: 900;
     height: 60px;
@@ -83,7 +83,7 @@ $TitleSize : 14px;
 }
 
 .ExploreBtn:hover {
-    color: #fff;
+    color: #000;
     background-color: $primary-color;
     border: none;
 
@@ -101,13 +101,13 @@ $TitleSize : 14px;
 
     .text2 {
         font-size: 16px;
-        color: #484848;
+        color: #fff;
         line-height: 2.5;
     }
 
     .heading {
         font-size: $HeadingSize;
-        color: #214354;
+        color: whitesmoke;
 
     }
 
@@ -125,7 +125,7 @@ $TitleSize : 14px;
 
     .btn:hover {
         background: $primary-color;
-        color: white;
+        color: black;
         text-decoration: none;
     }
 }
@@ -134,12 +134,12 @@ $TitleSize : 14px;
 .section2 {
     .heading {
         font-size: $HeadingSize;
-        color: #214354;
+        color: whitesmoke;
     }
 
     .text2 {
         font-size: 16px;
-        color: #484848;
+        color: #fff;
         line-height: 2.5;
     }
 
@@ -153,12 +153,12 @@ $TitleSize : 14px;
         margin-top: 20px;
         margin-bottom: 20px;
         padding: 50px 30px;
-        color: #214354;
+        color: whitesmoke;
 
     }
 
     .deal-card:hover {
-        color: white;
+        color: black;
         background-color: #8fe2c1;
 
         .readmore {
@@ -199,12 +199,13 @@ $TitleSize : 14px;
 //section 3
 .section3 {
     .Section3Card {
-        background-color: #214354;
+        background-color: black;
         color: white;
         height: 645px;
         width: 90%;
         border-radius: 20px;
         padding: 50px;
+        border: 1px solid white;
     }
 
     .horizontal-Line {
@@ -232,7 +233,7 @@ $TitleSize : 14px;
 
     .section3InnerCard {
 
-        background: white;
+        background: black;
         /* height: 432px; */
         width: 386px;
         box-shadow: 0px 0px 1px 1px #bebebe;
@@ -246,9 +247,9 @@ $TitleSize : 14px;
 
     .BuyNowBtn {
 
-        color: #214354;
-        background-color: #fff;
-        border: 2px solid #214354;
+        color: #fff;
+        background-color: #000;
+        border: 2px solid #fff;
         font-family: poppins;
         font-weight: 900;
         height: 60px;
@@ -283,19 +284,19 @@ $TitleSize : 14px;
 
     .heading {
         font-size: $HeadingSize;
-        color: #214354;
+        color: whitesmoke;
     }
 
     .text2 {
         font-size: 16px;
-        color: #484848;
+        color: #fff;
         line-height: 2.5;
     }
 
     .ExploreCard {
         padding: 50px;
         width: 100%;
-        background: white;
+        background: black;
         border-radius: 20px;
         box-shadow: 0px 0px 4px 1px #d5d5d5;
         text-align: center;
@@ -358,7 +359,7 @@ $TitleSize : 14px;
     .categoryCard {
         padding: 40px 10px;
         width: 100%;
-        background: white;
+        background: black;
         border-radius: 20px;
         box-shadow: 0px 0px 4px 1px #d5d5d5;
         text-align: center;
@@ -367,18 +368,18 @@ $TitleSize : 14px;
     }
     .heading {
         font-size: $HeadingSize;
-        color: #214354;
+        color: whitesmoke;
 
     }
     .text2 {
         font-size: 16px;
-        color: #484848;
+        color: #fff;
         line-height: 2.5;
     }
 
     .categoryCard:hover {
         background: $primary-color;
-        color: white;
+        color: black;
     }
 
     .categoryCardtext1 {
@@ -399,13 +400,13 @@ $TitleSize : 14px;
 .section6 {
     .text2 {
         font-size: 16px;
-        color: #484848;
+        color: #fff;
         line-height: 2.5;
     }
 
     .heading {
         font-size: $HeadingSize;
-        color: #214354;
+        color: whitesmoke;
 
     }
 
@@ -419,7 +420,7 @@ $TitleSize : 14px;
     }
 
     .testimoninalCardText1 {
-        color: #214354;
+        color: whitesmoke;
         font-size: 18px;
     }
 
@@ -439,20 +440,24 @@ $TitleSize : 14px;
 .section7{
     .heading {
         font-size: $HeadingSize;
-        color: #214354;
+        color: whitesmoke;
 
     }
 }
 .section8{
     .text2 {
         font-size: 16px;
-        color: #484848;
+        color: #fff;
         line-height: 1.6;
+    }
+    .logoimg{
+        width: 40%;
+        height: 300px;
     }
 
     .heading {
         font-size: $HeadingSize;
-        color: #214354;
+        color: whitesmoke;
 
     }
     .subscribeInput{
@@ -483,7 +488,7 @@ $TitleSize : 14px;
         top: 47px;
         width: 177px;
         background: $primary-color;
-        color: white;
+        color: black;
         border: none;
         font-size: 14px;
         font-weight: 900;
