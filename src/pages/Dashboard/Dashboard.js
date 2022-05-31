@@ -250,6 +250,8 @@ class Dashboard extends Component {
                <div className='col-md-12'>
                   <div className='row'>
                      <div className='col-md-4'>
+                     <Link to="/product">
+
                         <div className='ExploreCard'>
                            <p className='poppins_semibold newArrival'>New Arrival</p>
                            <img className='ExploreCardImg' src={product1} />
@@ -262,8 +264,11 @@ class Dashboard extends Component {
                            </div>
 
                         </div>
+                        </Link>
                      </div>
                      <div className='col-md-4'>
+                     <Link to="/product">
+
                         <div className='ExploreCard'>
                            <p className='poppins_semibold newArrival'>New Arrival</p>
 
@@ -277,8 +282,11 @@ class Dashboard extends Component {
                            </div>
 
                         </div>
+                        </Link>
                      </div>
                      <div className='col-md-4'>
+                     <Link to="/product">
+
                         <div className='ExploreCard'>
                            <p className='poppins_semibold newArrival'>New Arrival</p>
 
@@ -292,8 +300,11 @@ class Dashboard extends Component {
                            </div>
 
                         </div>
+                        </Link>
                      </div>
                      <div className='col-md-4'>
+                     <Link to="/product">
+
                         <div className='ExploreCard'>
                            <p className='poppins_semibold newArrival'>New Arrival</p>
 
@@ -307,8 +318,11 @@ class Dashboard extends Component {
                            </div>
 
                         </div>
+                        </Link>
                      </div>
                      <div className='col-md-4'>
+                     <Link to="/product">
+
                         <div className='ExploreCard'>
                            <p className='poppins_semibold newArrival'>New Arrival</p>
 
@@ -322,8 +336,11 @@ class Dashboard extends Component {
                            </div>
 
                         </div>
+                        </Link>
                      </div>
                      <div className='col-md-4'>
+                     <Link to="/product">
+
                         <div className='ExploreCard'>
                            <p className='poppins_semibold newArrival'>New Arrival</p>
 
@@ -337,6 +354,7 @@ class Dashboard extends Component {
                            </div>
 
                         </div>
+                        </Link>
                      </div>
                   </div>
                </div>

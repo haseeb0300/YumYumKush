@@ -120,12 +120,12 @@ class Checkout extends Component {
                                                 <div className='PaymentInnerCard'>
                                                     <div className='col-md-12'>
                                                         <div className='row'>
-                                                            <div className='col-3 my-auto'>
+                                                            <div className='col-md-3 text-center my-auto'>
                                                                 <input type="radio" name="COD" value="COD" /> <label className='RadioLabel'>COD</label>
 
 
                                                             </div>
-                                                            <div className='col-9 my-auto'>
+                                                            <div className='col-md-9 text-center my-auto'>
                                                                 <p className='poppins_regular BillingCardLabel'>You will be paying money when the package is deliverd to your door step</p>
 
                                                             </div>

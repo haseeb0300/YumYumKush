@@ -85,16 +85,16 @@ class Product extends Component {
 
                      <div className='col-12 CartMid'>
                         <div className='CartItemCard'>
-                           <div className='col-12'>
+                           <div className='col-md-12'>
                               <div className='row'>
-                                 <div className='col-3 text-center'>
-                                    <img className='w-100' src={CartItem1} />
+                                 <div className='col-md-3 text-center'>
+                                    <img className='w-100 MobileCartItemImg' src={CartItem1} />
                                  </div>
-                                 <div className='col-6 my-auto'>
+                                 <div className='col-md-6 my-auto text-center'>
                                     <p className='poppins_bold CartItemCardtext1'>God's Gift Indica</p>
                                     <p className='poppins_semibold CartItemCardtext2'>$ 50.00</p>
                                  </div>
-                                 <div className='col-3 my-auto p-0'>
+                                 <div className='col-md-3 text-center my-auto p-0'>
                                     <label className='poppins_bold addBtn'>-</label>
                                     <label className='mr-1 ml-1 poppins_bold'>1</label>
                                     <label className='poppins_bold addBtn'>+</label>

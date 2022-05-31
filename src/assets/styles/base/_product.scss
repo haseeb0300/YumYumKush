@@ -58,3 +58,16 @@ margin: 50px;
 
     }
 }
+@media (max-width: 767px) {
+    .FeedBackContainer .FeedBackCard{
+        margin: 0px;
+        padding: 40px 15px;
+
+    }
+    .FeedBackContainer .FeedBackCardHeading {
+        font-size: 26px;
+        color: black;
+    }
+    .FeedBackContainer .BillingCardTextArea {
+        height: 200px;}
+}

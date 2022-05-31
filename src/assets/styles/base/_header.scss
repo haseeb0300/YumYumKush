@@ -46,8 +46,63 @@ $primary-color: #78C2A4;
         color: white;
     }
 }
+.MobileHeader{
+    display: none;
+}
 @media (max-width: 767px) {
     .DesktopHeader{
         display: none;
+    }
+    .MobileHeader{
+        display: block;
+        border-bottom: 2px solid;
+        padding: 0px 10px 0px 0px;
+        position: sticky;
+        top: 0;
+        z-index: 2;
+        background: black;    }
+    .logoimg{
+        width: 67% !important;
+
+    }
+    .bars{
+        font-size: 40px;
+        margin-right: 10px;
+        margin-top: 20px;
+    }
+    .barbtn{
+        background: no-repeat;
+        border: none;
+    }
+    .barbtn:focus{
+        outline: none;
+    }
+    .card-body{
+        background: white;
+    width: 100%;
+    color: black;
+    padding: 32px;
+    font-size: 18px;
+    font-family: 'Poppins';
+    font-weight: 400;
+    }
+    .card-body li{
+        list-style: none;
+        padding: 10px;
+        color: black;
+
+    }
+    .card-body li:hover{
+background: black;
+color: white;
+    }
+    .card-body ul{
+        padding: 0px;
+
+    }
+    .nav_hr {
+ 
+        border: 0;
+        border-top: 1px solid #000;
     }
 }

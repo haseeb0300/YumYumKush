@@ -100,3 +100,31 @@ $TitleSize : 14px;
     }
 
 }
+@media (max-width: 767px) {
+    .checkoutContainer .BillingCard {
+        padding: 45px 0px;
+        height: 100%;
+        margin-bottom: 15px;
+        margin-top: 15px;
+        }
+        .checkoutContainer .PaymentCard{
+            padding: 45px 0px;
+            height: 100%;
+            margin-bottom: 15px;
+            margin-top: 15px;
+        }
+        .checkoutContainer .PaymentInnerCard {
+
+            padding: 30px 0px;
+            height: 100%;
+        }
+        .checkoutContainer .OrderCard {
+           
+            padding: 35px 0px;
+            color: #000;}
+            .checkoutContainer .GrandTotalCard {
+              
+                padding: 50px 0px;
+                height: fit-content;
+            }
+}

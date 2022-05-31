@@ -114,6 +114,64 @@ class Contact extends Component {
                </div>
             </div>
             {/* headerDesktop End */}
+            <div className='MobileHeader'>
+               <div className='col-12  p-0'>
+                  <div className='row'>
+                  <div className='col-8'>
+                  <img className='w-100 logoimg ' src={Logo} />
+
+                  </div>
+                  <div className='col-4 vertical_center text-right'>
+                     <button className='barbtn' type="button" data-toggle="collapse" data-target="#demo"  >
+                        <i class="fa fa-bars bars" aria-hidden="true"></i>
+                     </button>
+                  </div>
+                  </div>
+                 
+                  <div id="demo" class="collapse">
+                     <div class="card-body">
+                        <div className='col-12 text-center'>
+                        </div>
+                        <ul >
+                        <Link to="/">
+                           <li>Home </li>
+                           </Link>
+                           <div className="nav_hr"></div>
+                           <li>Store </li>
+                           <div className="nav_hr"></div>
+                           <Link to="#Rewards"> 
+                              <li>Rewards </li>
+                           </Link>
+                           <div className="nav_hr"></div>
+                           <a href="#Contact">
+                           <li>Contact </li>
+                           </a>
+                           <div className="nav_hr"></div>
+                           <a href="#About">
+                              <li>About </li>
+                           </a>
+                           <div className="nav_hr"></div>
+                           <a href="#Feedback">
+                              <li>Feedback </li>
+                           </a>
+                           <div className="nav_hr"></div>
+                           <Link to="/product">
+                           <li>Explore Product </li>
+                           </Link>
+                           <div className="nav_hr"></div>
+
+
+
+
+
+                        </ul>
+                     </div>
+                  </div>
+
+               </div>
+
+
+            </div>
 
             {/* header end */}
          </>

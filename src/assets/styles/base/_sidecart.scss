@@ -115,3 +115,24 @@ $primary-color: #78C2A4;
     border: 2px solid $primary-color;
 
 }
+@media (max-width: 767px) {
+    .sideCart .modal-content {
+        width: 80%;
+    }
+    .sideCart .MobileCartItemImg{
+        width: 49%!important;
+    }
+    .CartItemCard {
+   
+        margin-top: 10px;
+        margin-bottom: 10px;
+        padding: 5px 0px;
+    }
+    .CartBottomText2 {
+        font-size: 16px;
+        color: #78C2A4;
+    }
+    .Paynowbtn{
+        width: 100%;
+    }
+}
