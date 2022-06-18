@@ -8,21 +8,15 @@ import { Carousel } from 'react-responsive-carousel'
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import Header from '../../component/Header'
 
-import product1 from '../../assets/images/dashboard/section4/1.png'
-import product2 from '../../assets/images/dashboard/section4/2.png'
-import product3 from '../../assets/images/dashboard/section4/3.png'
-import product4 from '../../assets/images/dashboard/section4/4.png'
-import product5 from '../../assets/images/dashboard/section4/5.png'
-import product6 from '../../assets/images/dashboard/section4/6.png'
 
-import CartItem1 from '../../assets/images/sideCart/1.png'
-
-
+import { getInventory } from '../../store/actions/productAction';
 
 import Footer from '../../component/Footer'
 
 
-import sycrup from '../../assets/images/dashboard/section3/sycrup.svg'
+import sycrup from '../../assets/images/dashboard/section3/sycrup.svg';
+import { addToCart, removeFromCart } from '../../store/actions/cartAction';
+
 class Product extends Component {
 
    constructor(props) {
@@ -31,17 +25,78 @@ class Product extends Component {
          serverError: {},
          isLoading: false,
          showModal: false,
+         inventoryList: []
 
 
       };
    }
 
    componentDidMount() {
+      this.props.getInventory().then((res) => {
+         console.log(res)
+         this.setState({
+            inventoryList: res.content,
+         }
+         )
+      }).catch((err) => {
+         console.log(err)
 
+      })
    }
    handleClose = () => {
       this.setState({ showModal: false })
    }
+
+   onClickCart = (product) => {
+      console.log(product)
+      console.log(this.props.cart)
+
+      let items = this.props.cart.find(item => {
+         console.log(item)
+          return item.InventryId === product.InventryId
+      })
+      if (!items)
+          this.props.addToCart(product)
+      else {
+      }
+      this.setState({showModal: true})
+  }
+  onclickInventoryItem = (item) => {
+
+   this.props.history.push('/productdetail', { item: item })
+}
+
+   renderInventory = () => {
+      if (this.state.inventoryList && this.state.inventoryList.length < 1) {
+
+         return () =>
+
+            <p class="text-center" >   No Data To Display</p>
+
+
+
+      }
+      return this.state.inventoryList.map((item, i) =>
+         <>
+            <div className='col-md-4'>
+               <div className='ExploreCard'  onClick={() => this.onclickInventoryItem(item)}>
+                  <p className='poppins_semibold newArrival'>New Arrival</p>
+                  <img className='ExploreCardImg' src={item.InventryImages[i]?.imageUrl} />
+                  <p className='poppins_bold ExploreCardtext1'>{item.title}</p>
+                  <p className='poppins_regular ExploreCardtext2'>{item.status}</p>
+                  <p className='poppins_semibold ExploreCardtext3'>$ {item.InventryParams[0]?.price}</p>
+  
+
+               </div>
+            </div>
+
+         </>
+      )
+
+
+
+   }
+
 
 
 
@@ -58,88 +113,13 @@ class Product extends Component {
       return (
          <>
             <Header />
-            <div className='sideCart'>
-               <Modal
-
-                  onHide={this.handleClose}
-                  dialogClassName="col-xl-12  sideCart   "
-                  show={this.state.showModal}
-                  size="lg"
-                  aria-labelledby="contained-modal-title-vcenter"
-
-                  animation={false}
-               >
-
-
-                  <div className="  modal-body p-0">
-                     <div className='col-12 p-0'>
-                        <div className='cartTop'>
-                           <div className='row m-0'>
-                              <div className='col-8 p-0 poppins_bold'><p>Cart</p></div>
-                              <div className='col-4 text-right p-0' onClick={() => this.setState({ showModal: false })}><p>x</p></div>
-
-                           </div>
-
-                        </div>
-                     </div>
-
-                     <div className='col-12 CartMid'>
-                        <div className='CartItemCard'>
-                           <div className='col-md-12'>
-                              <div className='row'>
-                                 <div className='col-md-3 text-center'>
-                                    <img className='w-100 MobileCartItemImg' src={CartItem1} />
-                                 </div>
-                                 <div className='col-md-6 my-auto text-center'>
-                                    <p className='poppins_bold CartItemCardtext1'>God's Gift Indica</p>
-                                    <p className='poppins_semibold CartItemCardtext2'>$ 50.00</p>
-                                 </div>
-                                 <div className='col-md-3 text-center my-auto p-0'>
-                                    <label className='poppins_bold addBtn'>-</label>
-                                    <label className='mr-1 ml-1 poppins_bold'>1</label>
-                                    <label className='poppins_bold addBtn'>+</label>
-
-                                 </div>
-                              </div>
-                           </div>
-
-                        </div>
-
-                     </div>
-
-                     <div className='CartBottom'>
-                        <div className='col-12'>
-                           <div className='row'>
-                              <div className="col-4 my-auto">
-                                 <p className='poppins_regular CartBottomText1 '>Total</p>
-                                 <p className='poppins_regular poppins_semibold CartBottomText2'>$ 50.00</p>
-
-                              </div>
-                              <div className="col-8 text-right my-auto">
-                              <Link to="/checkout">
-
-                                 <button className='Paynowbtn'>Pay Now</button>
-                                 </Link>
-                              </div>
-                           </div>
-                        </div>
-
-                     </div>
-
-
-
-                  </div>
-
-
-               </Modal>
-
-            </div>
+          
 
 
             {/* section4 start */}
             <section className=' section4'>
                <div className="col-md-12 productPage">
-                  
+
                   <div className='row'>
                      <div className='col-md-3'>
                         <div className='FilterCategory'>
@@ -168,8 +148,8 @@ class Product extends Component {
                                  <input className="" type="checkbox" id="Categories" />
                                  <label className=" tilte poppins_light mt_4px" for="Categories">Merch</label>
                               </div>
-                              
-                              
+
+
                            </div>
                            <div className='mt-5'>
                               <p className='poppins_medium heading'>Category</p>
@@ -183,10 +163,10 @@ class Product extends Component {
                                  <label className=" tilte poppins_light mt_4px" for="Categories">Friday Deals</label>
 
                               </div>
-                              
-                            
-                              
-                              
+
+
+
+
                            </div>
                         </div>
                      </div>
@@ -194,184 +174,7 @@ class Product extends Component {
 
                         <div className='col-md-12'>
                            <div className='row'>
-                              <div className='col-md-4'>
-                                 <div className='ExploreCard'>
-                                    <p className='poppins_semibold newArrival'>New Arrival</p>
-                                    <img className='ExploreCardImg' src={product1} />
-                                    <p className='poppins_bold ExploreCardtext1'>Purple Slush</p>
-                                    <p className='poppins_regular ExploreCardtext2'>In Stock</p>
-                                    <p className='poppins_semibold ExploreCardtext3'>$ 40.00</p>
-                                    <div class="overlayy">
-                                       <img className='ExploreCardImg' src={product1} />
-                                       <div class="poppins_semibold ExploreCardtext4" onClick={() => this.setState({ showModal: true })}>Add to cart</div>
-                                    </div>
-
-                                 </div>
-                              </div>
-                              <div className='col-md-4'>
-                                 <div className='ExploreCard'>
-                                    <p className='poppins_semibold newArrival'>New Arrival</p>
-
-                                    <img className='ExploreCardImg' src={product2} />
-                                    <p className='poppins_bold ExploreCardtext1'>Purple Slush</p>
-                                    <p className='poppins_regular ExploreCardtext2'>In Stock</p>
-                                    <p className='poppins_semibold ExploreCardtext3'>$ 40.00</p>
-                                    <div class="overlayy">
-                                       <img className='ExploreCardImg' src={product2} />
-                                       <div class="poppins_semibold ExploreCardtext4">Add to cart</div>
-                                    </div>
-
-                                 </div>
-                              </div>
-                              <div className='col-md-4'>
-                                 <div className='ExploreCard'>
-                                    <p className='poppins_semibold newArrival'>New Arrival</p>
-
-                                    <img className='ExploreCardImg' src={product3} />
-                                    <p className='poppins_bold ExploreCardtext1'>God's Gift Indica</p>
-                                    <p className='poppins_regular ExploreCardtext2'>In Stock</p>
-                                    <p className='poppins_semibold ExploreCardtext3'>$ 50.00</p>
-                                    <div class="overlayy">
-                                       <img className='ExploreCardImg' src={product3} />
-                                       <div class="poppins_semibold ExploreCardtext4">Add to cart</div>
-                                    </div>
-
-                                 </div>
-                              </div>
-                              <div className='col-md-4'>
-                                 <div className='ExploreCard'>
-                                    <p className='poppins_semibold newArrival'>New Arrival</p>
-
-                                    <img className='ExploreCardImg' src={product4} />
-                                    <p className='poppins_bold ExploreCardtext1'>Jet Pack OG</p>
-                                    <p className='poppins_regular ExploreCardtext2'>In Stock</p>
-                                    <p className='poppins_semibold ExploreCardtext3'>$ 40.00</p>
-                                    <div class="overlayy">
-                                       <img className='ExploreCardImg' src={product4} />
-                                       <div class="poppins_semibold ExploreCardtext4">Add to cart</div>
-                                    </div>
-
-                                 </div>
-                              </div>
-                              <div className='col-md-4'>
-                                 <div className='ExploreCard'>
-                                    <p className='poppins_semibold newArrival'>New Arrival</p>
-
-                                    <img className='ExploreCardImg' src={product5} />
-                                    <p className='poppins_bold ExploreCardtext1'>Purple Goddess</p>
-                                    <p className='poppins_regular ExploreCardtext2'>In Stock</p>
-                                    <p className='poppins_semibold ExploreCardtext3'>$ 40.00</p>
-                                    <div class="overlayy">
-                                       <img className='ExploreCardImg' src={product5} />
-                                       <div class="poppins_semibold ExploreCardtext4">Add to cart</div>
-                                    </div>
-
-                                 </div>
-                              </div>
-                              <div className='col-md-4'>
-                                 <div className='ExploreCard'>
-                                    <p className='poppins_semibold newArrival'>New Arrival</p>
-
-                                    <img className='ExploreCardImg' src={product6} />
-                                    <p className='poppins_bold ExploreCardtext1'>Wedding Cake</p>
-                                    <p className='poppins_regular ExploreCardtext2'>In Stock</p>
-                                    <p className='poppins_semibold ExploreCardtext3'>$ 40.00</p>
-                                    <div class="overlayy">
-                                       <img className='ExploreCardImg' src={product6} />
-                                       <div class="poppins_semibold ExploreCardtext4">Add to cart</div>
-                                    </div>
-
-                                 </div>
-                              </div>
-                              <div className='col-md-4'>
-                                 <div className='ExploreCard'>
-                                    <p className='poppins_semibold newArrival'>New Arrival</p>
-                                    <img className='ExploreCardImg' src={product1} />
-                                    <p className='poppins_bold ExploreCardtext1'>Purple Slush</p>
-                                    <p className='poppins_regular ExploreCardtext2'>In Stock</p>
-                                    <p className='poppins_semibold ExploreCardtext3'>$ 40.00</p>
-                                    <div class="overlayy">
-                                       <img className='ExploreCardImg' src={product1} />
-                                       <div class="poppins_semibold ExploreCardtext4">Add to cart</div>
-                                    </div>
-
-                                 </div>
-                              </div>
-                              <div className='col-md-4'>
-                                 <div className='ExploreCard'>
-                                    <p className='poppins_semibold newArrival'>New Arrival</p>
-
-                                    <img className='ExploreCardImg' src={product2} />
-                                    <p className='poppins_bold ExploreCardtext1'>Purple Slush</p>
-                                    <p className='poppins_regular ExploreCardtext2'>In Stock</p>
-                                    <p className='poppins_semibold ExploreCardtext3'>$ 40.00</p>
-                                    <div class="overlayy">
-                                       <img className='ExploreCardImg' src={product2} />
-                                       <div class="poppins_semibold ExploreCardtext4">Add to cart</div>
-                                    </div>
-
-                                 </div>
-                              </div>
-                              <div className='col-md-4'>
-                                 <div className='ExploreCard'>
-                                    <p className='poppins_semibold newArrival'>New Arrival</p>
-
-                                    <img className='ExploreCardImg' src={product3} />
-                                    <p className='poppins_bold ExploreCardtext1'>God's Gift Indica</p>
-                                    <p className='poppins_regular ExploreCardtext2'>In Stock</p>
-                                    <p className='poppins_semibold ExploreCardtext3'>$ 50.00</p>
-                                    <div class="overlayy">
-                                       <img className='ExploreCardImg' src={product3} />
-                                       <div class="poppins_semibold ExploreCardtext4">Add to cart</div>
-                                    </div>
-
-                                 </div>
-                              </div>
-                              <div className='col-md-4'>
-                                 <div className='ExploreCard'>
-                                    <p className='poppins_semibold newArrival'>New Arrival</p>
-
-                                    <img className='ExploreCardImg' src={product4} />
-                                    <p className='poppins_bold ExploreCardtext1'>Jet Pack OG</p>
-                                    <p className='poppins_regular ExploreCardtext2'>In Stock</p>
-                                    <p className='poppins_semibold ExploreCardtext3'>$ 40.00</p>
-                                    <div class="overlayy">
-                                       <img className='ExploreCardImg' src={product4} />
-                                       <div class="poppins_semibold ExploreCardtext4">Add to cart</div>
-                                    </div>
-
-                                 </div>
-                              </div>
-                              <div className='col-md-4'>
-                                 <div className='ExploreCard'>
-                                    <p className='poppins_semibold newArrival'>New Arrival</p>
-
-                                    <img className='ExploreCardImg' src={product5} />
-                                    <p className='poppins_bold ExploreCardtext1'>Purple Goddess</p>
-                                    <p className='poppins_regular ExploreCardtext2'>In Stock</p>
-                                    <p className='poppins_semibold ExploreCardtext3'>$ 40.00</p>
-                                    <div class="overlayy">
-                                       <img className='ExploreCardImg' src={product5} />
-                                       <div class="poppins_semibold ExploreCardtext4">Add to cart</div>
-                                    </div>
-
-                                 </div>
-                              </div>
-                              <div className='col-md-4'>
-                                 <div className='ExploreCard'>
-                                    <p className='poppins_semibold newArrival'>New Arrival</p>
-
-                                    <img className='ExploreCardImg' src={product6} />
-                                    <p className='poppins_bold ExploreCardtext1'>Wedding Cake</p>
-                                    <p className='poppins_regular ExploreCardtext2'>In Stock</p>
-                                    <p className='poppins_semibold ExploreCardtext3'>$ 40.00</p>
-                                    <div class="overlayy">
-                                       <img className='ExploreCardImg' src={product6} />
-                                       <div class="poppins_semibold ExploreCardtext4">Add to cart</div>
-                                    </div>
-
-                                 </div>
-                              </div>
+                              {this.renderInventory()}
                            </div>
                         </div>
                      </div>
@@ -401,11 +204,14 @@ class Product extends Component {
    }
 
 }
-const mapStatetoProps = ({ auth }) => ({
-   user: auth.user
+const mapStatetoProps = ({ auth, cart }) => ({
+   user: auth.user,
+   cart: cart?.cart
 })
 const mapDispatchToProps = ({
-
+   getInventory,
+   addToCart,
+   removeFromCart,
 })
 Product.propTypes = {
 };

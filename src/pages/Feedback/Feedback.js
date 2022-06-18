@@ -10,7 +10,6 @@ import Header from '../../component/Header'
 import Footer from '../../component/Footer'
 import Lock from '../../assets/images/sideCart/lock.png'
 
-
 class Feedback extends Component {
 
     constructor(props) {
@@ -19,18 +18,12 @@ class Feedback extends Component {
             serverError: {},
             isLoading: false,
             showModal: false,
-
-
         };
     }
 
     componentDidMount() {
 
     }
-
-
-
-
 
     render() {
         // const { t, i18n } = this.props

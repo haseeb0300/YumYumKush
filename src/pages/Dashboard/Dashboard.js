@@ -20,6 +20,7 @@ import slider1 from '../../assets/images/dashboard/section7/1.png'
 import Logo from '../../assets/images/header/Logo.png'
 import envolpe from '../../assets/images/dashboard/section7/envolpe.png'
 import { Link, withRouter } from 'react-router-dom';
+import { getDeal, getInventory, getCategory } from '../../store/actions/productAction';
 
 import Footer from '../../component/Footer'
 
@@ -31,11 +32,156 @@ class Dashboard extends Component {
       this.state = {
          serverError: {},
          isLoading: false,
+         dealList: [],
+         inventoryList: [],
+         categoryList: [],
+
 
       };
    }
 
    componentDidMount() {
+      this.props.getDeal().then((res) => {
+         console.log(res)
+         this.setState({
+            dealList: res.content,
+         }
+         )
+      }).catch((err) => {
+         console.log(err)
+
+      })
+      this.props.getInventory().then((res) => {
+         console.log(res)
+         this.setState({
+            inventoryList: res.content,
+         }
+         )
+      }).catch((err) => {
+         console.log(err)
+
+      })
+      this.props.getCategory().then((res) => {
+         console.log(res)
+         this.setState({
+            categoryList: res.content,
+         }
+         )
+      }).catch((err) => {
+         console.log(err)
+
+      })
+   }
+   renderDeals = () => {
+      if (this.state.dealList && this.state.dealList.length < 1) {
+
+         return () =>
+
+            <p class="text-center" >   No Data To Display</p>
+
+
+
+      }
+      return this.state.dealList.map((item, i) =>
+         <>
+            <div className='col-md-6'>
+               <div className='col-md-12'>
+                  <div className='deal-card'  onClick={() => this.onclickDealItem(item)}>
+
+                     <div className='row'>
+                        <div className='col-md-4'>
+                           <img className='dealImg' src={item.DealImages[i].imageUrl} />
+
+                        </div>
+                        <div className='col-md-8'>
+                           <p className='deal-card-heading poppins_bold'>{item.dealName}</p>
+                           <p className='poppins_regular deal-card-text'>{item.dealPrice}
+                              {item.dealDescription}</p>
+                           <div className='readmore'>Read more</div>
+
+                        </div>
+
+
+                     </div>
+                  </div>
+
+
+               </div>
+            </div>
+
+         </>
+      )
+
+
+
+   }
+   onclickDealItem = (item) => {
+
+      this.props.history.push('/dealdetail', { item: item })
+  }
+   onclickInventoryItem = (item) => {
+
+      this.props.history.push('/productdetail', { item: item })
+  }
+   renderInventory = () => {
+      if (this.state.inventoryList && this.state.inventoryList.length < 1) {
+
+         return () =>
+
+            <p class="text-center" >   No Data To Display</p>
+
+
+
+      }
+      return this.state.inventoryList.map((item, i) =>
+         <>
+            <div className='col-md-4'>
+
+                  <div className='ExploreCard'  onClick={() => this.onclickInventoryItem(item)}>
+                     <p className='poppins_semibold newArrival'>New Arrival</p>
+                     <img className='ExploreCardImg' src={item.InventryImages[i]?.imageUrl} />
+                     <p className='poppins_bold ExploreCardtext1'>{item.title}</p>
+                     <p className='poppins_regular ExploreCardtext2'>{item.status}</p>
+                     <p className='poppins_semibold ExploreCardtext3'>$ {item.InventryParams[0]?.price}</p>
+                     {/* <div class="overlayy">
+                        <img className='ExploreCardImg' src={item.InventryImages[i]?.imageUrl} />
+                        <div class="poppins_semibold ExploreCardtext4">Add to cart</div>
+                     </div> */}
+
+                  </div>
+            </div>
+
+         </>
+      )
+
+
+
+   }
+   renderCategory = () => {
+      if (this.state.categoryList && this.state.categoryList.length < 1) {
+
+         return () =>
+
+            <p class="text-center" >   No Data To Display</p>
+
+
+
+      }
+      return this.state.categoryList.map((item, i) =>
+         <>
+            <div className='col-md-3'>
+               <div className='categoryCard'>
+                  <p className='categoryCardtext1 poppins_semibold'>{item.title}</p>
+                  <p className='categoryCardtext2 poppins_regular'>30 Products</p>
+                  <p className='categoryCardtext3 poppins_light'>Shop Now</p>
+               </div>
+            </div>
+
+
+         </>
+      )
+
+
 
    }
 
@@ -45,7 +191,7 @@ class Dashboard extends Component {
    render() {
       // const { t, i18n } = this.props
       const { t, i18n, location, user } = this.props
-      const { isLoading } = this.state;
+      const { isLoading, inventoryList } = this.state;
       if (isLoading) {
          return (
             <div className="loader-large"></div>
@@ -64,11 +210,11 @@ class Dashboard extends Component {
                         <p className='text2 poppins_regular'>We strive to provide every customer with a great delivery experience, as well as pride ourselves in having a variety of THC and CBD products to choose from that can be delivered straight to you.</p>
                         <Link to="/product">
 
-                        <button className='btn primarycolor'>Buy Now</button>
+                           <button className='btn primarycolor'>Buy Now</button>
                         </Link>
                         <Link to="/product">
 
-                        <button className='btn primarycolor'>Explore More</button>
+                           <button className='btn primarycolor'>Explore More</button>
                         </Link>
 
                      </div>
@@ -92,118 +238,17 @@ class Dashboard extends Component {
                </div>
                <div className='col-md-12'>
                   <div className='row'>
-                     <div className='col-md-6'>
-                        <div className='col-md-12'>
-                           <div className='deal-card'>
+                     {this.renderDeals()}
+            
 
-                              <div className='row'>
-                                 <div className='col-md-4'>
-                                    <img src={section2img} />
-
-                                 </div>
-                                 <div className='col-md-8'>
-                                    <p className='deal-card-heading poppins_bold'>Tuesday Deals!</p>
-                                    <p className='poppins_regular deal-card-text'>$10 off Any Top Shelf Eighth or Higher!
-                                       $100 oz's On Our Good Deals Category!
-                                       $75 OZ of Our Premium Shake!
-                                       Edibles 4 for $50!</p>
-                                    <div className='readmore'>Read more</div>
-
-                                 </div>
-
-
-                              </div>
-                           </div>
-
-
-                        </div>
-                     </div>
-                     <div className='col-md-6'>
-                        <div className='col-md-12'>
-                           <div className='deal-card'>
-
-                              <div className='row'>
-                                 <div className='col-md-4'>
-                                    <img src={section2img} />
-
-                                 </div>
-                                 <div className='col-md-8'>
-                                    <p className='deal-card-heading poppins_bold'>Tuesday Deals!</p>
-                                    <p className='poppins_regular deal-card-text'>$10 off Any Top Shelf Eighth or Higher!
-                                       $100 oz's On Our Good Deals Category!
-                                       $75 OZ of Our Premium Shake!
-                                       Edibles 4 for $50!</p>
-                                    <div className='readmore'>Read more</div>
-
-                                 </div>
-
-
-                              </div>
-                           </div>
-
-
-                        </div>
-                     </div>
-                     <div className='col-md-6'>
-                        <div className='col-md-12'>
-                           <div className='deal-card'>
-
-                              <div className='row'>
-                                 <div className='col-md-4'>
-                                    <img src={section2img} />
-
-                                 </div>
-                                 <div className='col-md-8'>
-                                    <p className='deal-card-heading poppins_bold'>Tuesday Deals!</p>
-                                    <p className='poppins_regular deal-card-text'>$10 off Any Top Shelf Eighth or Higher!
-                                       $100 oz's On Our Good Deals Category!
-                                       $75 OZ of Our Premium Shake!
-                                       Edibles 4 for $50!</p>
-                                    <div className='readmore'>Read more</div>
-
-                                 </div>
-
-
-                              </div>
-                           </div>
-
-
-                        </div>
-                     </div>
-                     <div className='col-md-6'>
-                        <div className='col-md-12'>
-                           <div className='deal-card'>
-
-                              <div className='row'>
-                                 <div className='col-md-4'>
-                                    <img src={section2img} />
-
-                                 </div>
-                                 <div className='col-md-8'>
-                                    <p className='deal-card-heading poppins_bold'>Tuesday Deals!</p>
-                                    <p className='poppins_regular deal-card-text'>$10 off Any Top Shelf Eighth or Higher!
-                                       $100 oz's On Our Good Deals Category!
-                                       $75 OZ of Our Premium Shake!
-                                       Edibles 4 for $50!</p>
-                                    <div className='readmore'>Read more</div>
-
-                                 </div>
-
-
-                              </div>
-                           </div>
-
-
-                        </div>
-                     </div>
 
 
                   </div>
                </div>
                <div className='col-md-12 text-center'>
-               <Link to="/product">
+                  <Link to="/product">
 
-                  <button className='ExploreBtn'>Explore More</button>
+                     <button className='ExploreBtn'>Explore More</button>
                   </Link>
                </div>
 
@@ -218,13 +263,13 @@ class Dashboard extends Component {
                         <div className='row'>
                            <div className='col-md-8'>
                               <p className='text1 poppins_regular'><label className='horizontal-Line'></label> FEATURED PRODUCT <label className='horizontal-Line'></label></p>
-                              <p className='heading poppins_bold'>Haute Sauce THC Syrup 2000MG $40 </p>
-                              <p className='poppins_regular text2'>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries.</p>
+                              <p className='heading poppins_bold'>{inventoryList[0]?.title} </p>
+                              <p className='poppins_regular text2'>{inventoryList[0]?.description}</p>
                               <button className='BuyNowBtn'>Buy Now</button>
                            </div>
                            <div className='col-md-4'>
                               <div className='section3InnerCard text-center'>
-                                 <img className='w-100' src={sycrup} />
+                                 <img className='w-100 featureImg' src={inventoryList[0]?.InventryImages[0]?.imageUrl} />
 
                               </div>
                            </div>
@@ -234,6 +279,10 @@ class Dashboard extends Component {
 
 
                   </div>
+                  
+
+
+
                </div>
 
             </section>
@@ -249,120 +298,15 @@ class Dashboard extends Component {
                </div>
                <div className='col-md-12'>
                   <div className='row'>
-                     <div className='col-md-4'>
-                     <Link to="/product">
-
-                        <div className='ExploreCard'>
-                           <p className='poppins_semibold newArrival'>New Arrival</p>
-                           <img className='ExploreCardImg' src={product1} />
-                           <p className='poppins_bold ExploreCardtext1'>Purple Slush</p>
-                           <p className='poppins_regular ExploreCardtext2'>In Stock</p>
-                           <p className='poppins_semibold ExploreCardtext3'>$ 40.00</p>
-                           <div class="overlayy">
-                              <img className='ExploreCardImg' src={product1} />
-                              <div class="poppins_semibold ExploreCardtext4">Add to cart</div>
-                           </div>
-
-                        </div>
-                        </Link>
-                     </div>
-                     <div className='col-md-4'>
-                     <Link to="/product">
-
-                        <div className='ExploreCard'>
-                           <p className='poppins_semibold newArrival'>New Arrival</p>
-
-                           <img className='ExploreCardImg' src={product2} />
-                           <p className='poppins_bold ExploreCardtext1'>Purple Slush</p>
-                           <p className='poppins_regular ExploreCardtext2'>In Stock</p>
-                           <p className='poppins_semibold ExploreCardtext3'>$ 40.00</p>
-                           <div class="overlayy">
-                              <img className='ExploreCardImg' src={product2} />
-                              <div class="poppins_semibold ExploreCardtext4">Add to cart</div>
-                           </div>
-
-                        </div>
-                        </Link>
-                     </div>
-                     <div className='col-md-4'>
-                     <Link to="/product">
-
-                        <div className='ExploreCard'>
-                           <p className='poppins_semibold newArrival'>New Arrival</p>
-
-                           <img className='ExploreCardImg' src={product3} />
-                           <p className='poppins_bold ExploreCardtext1'>God's Gift Indica</p>
-                           <p className='poppins_regular ExploreCardtext2'>In Stock</p>
-                           <p className='poppins_semibold ExploreCardtext3'>$ 50.00</p>
-                           <div class="overlayy">
-                              <img className='ExploreCardImg' src={product3} />
-                              <div class="poppins_semibold ExploreCardtext4">Add to cart</div>
-                           </div>
-
-                        </div>
-                        </Link>
-                     </div>
-                     <div className='col-md-4'>
-                     <Link to="/product">
-
-                        <div className='ExploreCard'>
-                           <p className='poppins_semibold newArrival'>New Arrival</p>
-
-                           <img className='ExploreCardImg' src={product4} />
-                           <p className='poppins_bold ExploreCardtext1'>Jet Pack OG</p>
-                           <p className='poppins_regular ExploreCardtext2'>In Stock</p>
-                           <p className='poppins_semibold ExploreCardtext3'>$ 40.00</p>
-                           <div class="overlayy">
-                              <img className='ExploreCardImg' src={product4} />
-                              <div class="poppins_semibold ExploreCardtext4">Add to cart</div>
-                           </div>
-
-                        </div>
-                        </Link>
-                     </div>
-                     <div className='col-md-4'>
-                     <Link to="/product">
-
-                        <div className='ExploreCard'>
-                           <p className='poppins_semibold newArrival'>New Arrival</p>
-
-                           <img className='ExploreCardImg' src={product5} />
-                           <p className='poppins_bold ExploreCardtext1'>Purple Goddess</p>
-                           <p className='poppins_regular ExploreCardtext2'>In Stock</p>
-                           <p className='poppins_semibold ExploreCardtext3'>$ 40.00</p>
-                           <div class="overlayy">
-                              <img className='ExploreCardImg' src={product5} />
-                              <div class="poppins_semibold ExploreCardtext4">Add to cart</div>
-                           </div>
-
-                        </div>
-                        </Link>
-                     </div>
-                     <div className='col-md-4'>
-                     <Link to="/product">
-
-                        <div className='ExploreCard'>
-                           <p className='poppins_semibold newArrival'>New Arrival</p>
-
-                           <img className='ExploreCardImg' src={product6} />
-                           <p className='poppins_bold ExploreCardtext1'>Wedding Cake</p>
-                           <p className='poppins_regular ExploreCardtext2'>In Stock</p>
-                           <p className='poppins_semibold ExploreCardtext3'>$ 40.00</p>
-                           <div class="overlayy">
-                              <img className='ExploreCardImg' src={product6} />
-                              <div class="poppins_semibold ExploreCardtext4">Add to cart</div>
-                           </div>
-
-                        </div>
-                        </Link>
-                     </div>
+                     {this.renderInventory()}
+                    
                   </div>
                </div>
 
                <div className='col-md-12 text-center'>
-               <Link to="/product">
+                  <Link to="/product">
 
-                  <button className='ExploreBtn'>Explore More</button>
+                     <button className='ExploreBtn'>Explore More</button>
                   </Link>
                </div>
 
@@ -370,7 +314,7 @@ class Dashboard extends Component {
             {/* section4 end */}
             {/* section5 start */}
 
-            <section className='container section5'>
+            <section id="Category" className='container section5'>
                <div className='col-md-12 mt-mb-30 text-center'>
                   <div className='centerheading'>
                      <p className='text1 poppins_regular'><label className='horizontal-Line'></label> Categories! <label className='horizontal-Line'></label></p>
@@ -380,73 +324,14 @@ class Dashboard extends Component {
                </div>
                <div className='col-md-12'>
                   <div className='row'>
-                     <div className='col-md-3'>
-                        <div className='categoryCard'>
-                           <p className='categoryCardtext1 poppins_semibold'>FLOWER</p>
-                           <p className='categoryCardtext2 poppins_regular'>30 Products</p>
-                           <p className='categoryCardtext3 poppins_light'>Shop Now</p>
-                        </div>
-                     </div>
-                     <div className='col-md-3'>
-                        <div className='categoryCard'>
-                           <p className='categoryCardtext1 poppins_semibold'>WAX</p>
-                           <p className='categoryCardtext2 poppins_regular'>41 Products</p>
-                           <p className='categoryCardtext3 poppins_light'>Shop Now</p>
-                        </div>
-                     </div>
-                     <div className='col-md-3'>
-                        <div className='categoryCard'>
-                           <p className='categoryCardtext1 poppins_semibold'>EDIBLE</p>
-                           <p className='categoryCardtext2 poppins_regular'>30 Products</p>
-                           <p className='categoryCardtext3 poppins_light'>Shop Now</p>
-                        </div>
-                     </div>
-                     <div className='col-md-3'>
-                        <div className='categoryCard'>
-                           <p className='categoryCardtext1 poppins_semibold'>CLONES</p>
-                           <p className='categoryCardtext2 poppins_regular'>0 Products</p>
-                           <p className='categoryCardtext3 poppins_light'>Shop Now</p>
-                        </div>
-                     </div>
-                     <div className='col-md-3'>
-                        <div className='categoryCard'>
-                           <p className='categoryCardtext1 poppins_semibold'>TOPICALS</p>
-                           <p className='categoryCardtext2 poppins_regular'>30 Products</p>
-                           <p className='categoryCardtext3 poppins_light'>Shop Now</p>
-                        </div>
-                     </div>
-                     <div className='col-md-3'>
-                        <div className='categoryCard'>
-                           <p className='categoryCardtext1 poppins_semibold'>PRE-ROLLS</p>
-                           <p className='categoryCardtext2 poppins_regular'>30 Products</p>
-                           <p className='categoryCardtext3 poppins_light'>Shop Now</p>
-                        </div>
-                     </div>
-                     <div className='col-md-3'>
-                        <div className='categoryCard'>
-                           <p className='categoryCardtext1 poppins_semibold'>CARTS</p>
-                           <p className='categoryCardtext2 poppins_regular'>30 Products</p>
-                           <p className='categoryCardtext3 poppins_light'>Shop Now</p>
-                        </div>
-                     </div>
-                     <div className='col-md-3'>
-                        <div className='categoryCard'>
-                           <p className='categoryCardtext1 poppins_semibold'>MERCH</p>
-                           <p className='categoryCardtext2 poppins_regular'>30 Products</p>
-                           <p className='categoryCardtext3 poppins_light'>Shop Now</p>
-                        </div>
-                     </div>
+                     {this.renderCategory()}
                   </div>
                </div>
-
-
                <div className='col-md-12 text-center'>
-               <Link to="/product">
-
-                  <button className='ExploreBtn'>Explore More</button>
+                  <Link to="/product">
+                     <button className='ExploreBtn'>Explore More</button>
                   </Link>
                </div>
-
             </section>
             {/* section5 end */}
             {/* section6 start */}
@@ -570,7 +455,7 @@ class Dashboard extends Component {
             {/* section8 start */}
 
 
-            <section id="About"  className='container section8'>
+            <section id="About" className='container section8'>
                <div className='col-md-12 mt-mb-30 text-center'>
                   <div className='centerheading'>
                      <p className='text1 poppins_regular'><label className='horizontal-Line'></label> ABOUT US <label className='horizontal-Line'></label></p>
@@ -610,7 +495,7 @@ class Dashboard extends Component {
 
 
             </section>
-          <Footer/>
+            <Footer />
             {/* section8 end */}
 
          </>
@@ -623,7 +508,9 @@ const mapStatetoProps = ({ auth }) => ({
    user: auth.user
 })
 const mapDispatchToProps = ({
-
+   getDeal,
+   getInventory,
+   getCategory
 })
 Dashboard.propTypes = {
 };

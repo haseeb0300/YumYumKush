@@ -55,6 +55,10 @@ $TitleSize : 14px;
     margin-right: 10px;
     margin-left: 10px;
 }
+.dealImg{
+    height: 100px;
+    width: 100px;
+}
 
 .text1 {
     font-size: $TitleSize;
@@ -142,8 +146,12 @@ $TitleSize : 14px;
         color: #fff;
         line-height: 2.5;
     }
+.featureImg{
+    height: 392px;
 
+}
     .deal-card {
+        min-height: 250px;
 
         width: 96%;
         margin-left: auto;
@@ -303,6 +311,11 @@ $TitleSize : 14px;
         margin-top: 15px;
         margin-bottom: 15px;
     }
+    .ExploreCard:hover{
+        transform: scale(1.01);
+        cursor: pointer;
+
+    }
 
     .overlayy {
 
@@ -325,10 +338,17 @@ $TitleSize : 14px;
         opacity: 1;
         cursor: pointer;
     }
-
+.ExploreCard:hover .newArrival {
+    color: #D5BA74;
+    font-size: 12px;
+    position: absolute;
+    left: 30px;
+    top: 35px;
+}
     .ExploreCardtext1 {
         font-size: 21px;
         color: white;
+        margin-top: 10px;
     }
 
     .ExploreCardtext2 {

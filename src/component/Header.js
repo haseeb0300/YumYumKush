@@ -4,9 +4,12 @@ import { connect } from 'react-redux';
 import { Carousel } from 'react-responsive-carousel'
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Link, withRouter } from 'react-router-dom';
+import { Modal } from 'react-bootstrap';
 
 import Logo from '../assets/images/header/Logo.png'
 import Cart from '../assets/images/header/Cart.svg'
+import { addToCart, removeFromCart } from '../store/actions/cartAction';
+import { ThemeProvider } from 'react-bootstrap';
 
 
 
@@ -19,8 +22,24 @@ class Contact extends Component {
          serverError: {},
          isLoading: false,
          newBookList: [],
+         total: 0
 
       };
+   }
+
+   componentDidUpdate(prevProps, prevState) {
+      if (prevProps.cart !== this.props.cart) {
+         var tmptotal = 0
+         this.props.cart.map((item, i) => {
+            if (item.InventryId) {
+               tmptotal = tmptotal + item.price
+            } else {
+               tmptotal = tmptotal + parseInt(item.dealPrice)
+            }
+            this.setState({ total: tmptotal }, () => { console.log(this.state.total) })
+         }
+         )
+      }
    }
 
    componentDidMount() {
@@ -28,8 +47,13 @@ class Contact extends Component {
    }
 
 
+   handleClose = () => {
+      this.setState({ showModal: false })
+   }
+   onClickPay = () => {
 
-
+      this.props.history.push('/checkout',{total: this.state.total})
+   }
    render() {
       // const { t, i18n } = this.props
       const { t, i18n, location, user } = this.props
@@ -46,6 +70,103 @@ class Contact extends Component {
 
             {/* headerDesktop Start */}
             <div className='DesktopHeader'>
+               <div className='sideCart'>
+                  <Modal
+
+                     onHide={() => this.props.handleCloseModal()}
+                     dialogClassName="col-xl-12  sideCart   "
+                     show={this.props.showModal}
+                     size="lg"
+                     aria-labelledby="contained-modal-title-vcenter"
+
+                     animation={false}
+                  >
+
+
+                     <div className="  modal-body p-0">
+                        <div className='col-12 p-0'>
+                           <div className='cartTop'>
+                              <div className='row m-0'>
+                                 <div className='col-8 p-0 poppins_bold'><p>Cart</p></div>
+                                 <div className='col-4 text-right p-0' onClick={() => this.props.handleCloseModal()}><p>x</p></div>
+
+                              </div>
+
+                           </div>
+                        </div>
+
+                        <div className='col-12 CartMid'>
+
+                           {this.props.cart.map((item, i) => {
+
+                              return (
+                                 <div className='CartItemCard'>
+                                    <div className='col-md-12'>
+                                       {item.DealId && (
+                                          <div className='row'>
+                                             <div className='col-md-3 text-center'>
+                                                <img className='w-100 MobileCartItemImg' src={item?.DealImages[0]?.imageUrl} />
+                                             </div>
+                                             <div className='col-md-6 my-auto text-center'>
+                                                <p className='poppins_bold CartItemCardtext1'>{item?.dealName}</p>
+                                                <p className='poppins_semibold CartItemCardtext2'>${item?.dealPrice}</p>
+                                             </div>
+                                             <div className='col-md-3 text-center my-auto p-0'>
+                                                <label className='poppins_bold addBtn'>-</label>
+                                                <label className='mr-1 ml-1 poppins_bold'>1</label>
+                                                <label className='poppins_bold addBtn'>+</label>
+                                             </div>
+                                          </div>
+                                       )}
+                                       {item.InventryId && (
+                                          <div className='row'>
+                                             <div className='col-md-3 text-center'>
+                                                <img className='w-100 MobileCartItemImg' src={item.InventryImages[0]?.imageUrl} />
+                                             </div>
+                                             <div className='col-md-6 my-auto text-center'>
+                                                <p className='poppins_bold CartItemCardtext1'>{item.title}</p>
+                                                <p className='poppins_semibold CartItemCardtext2'>$ {item.price}</p>
+                                             </div>
+                                             <div className='col-md-3 text-center my-auto p-0'>
+                                                <label className='poppins_bold addBtn'>-</label>
+                                                <label className='mr-1 ml-1 poppins_bold'>1</label>
+                                                <label className='poppins_bold addBtn'>+</label>
+                                             </div>
+                                          </div>
+                                       )}
+                                    </div>
+
+                                 </div>
+                              )
+                           })}
+
+
+                        </div>
+
+                        <div className='CartBottom'>
+                           <div className='col-12'>
+                              <div className='row'>
+                                 <div className="col-4 my-auto">
+                                    <p className='poppins_regular CartBottomText1 '>Total</p>
+                                    <p className='poppins_regular poppins_semibold CartBottomText2'>$ {this.state.total}</p>
+
+                                 </div>
+                                 <div className="col-8 text-right my-auto">
+
+                                       <button className='Paynowbtn' onClick={() => this.onClickPay()}>Pay Now</button>
+                                 </div>
+                              </div>
+                           </div>
+
+                        </div>
+
+
+
+                     </div>
+
+
+                  </Modal>
+               </div>
                <div className='col-md-12  backwhite'>
                   <div className='row'>
                      <div className='col-md-2 text-center'>
@@ -63,7 +184,12 @@ class Contact extends Component {
                                  </Link>
                               </div>
                               <div className='col-md-2 text-center'>
-                                 <p className=' headerTabs'>Store</p>
+                                 <a href="#Category">
+
+
+                                    <p className=' headerTabs'>Store</p>
+
+                                 </a>
                               </div>
                               <div className='col-md-2 text-center'>
                                  <a href="#Rewards">
@@ -117,34 +243,37 @@ class Contact extends Component {
             <div className='MobileHeader'>
                <div className='col-12  p-0'>
                   <div className='row'>
-                  <div className='col-8'>
-                  <img className='w-100 logoimg ' src={Logo} />
+                     <div className='col-8'>
+                        <img className='w-100 logoimg ' src={Logo} />
 
+                     </div>
+                     <div className='col-4 vertical_center text-right'>
+                        <button className='barbtn' type="button" data-toggle="collapse" data-target="#demo"  >
+                           <i class="fa fa-bars bars" aria-hidden="true"></i>
+                        </button>
+                     </div>
                   </div>
-                  <div className='col-4 vertical_center text-right'>
-                     <button className='barbtn' type="button" data-toggle="collapse" data-target="#demo"  >
-                        <i class="fa fa-bars bars" aria-hidden="true"></i>
-                     </button>
-                  </div>
-                  </div>
-                 
+
                   <div id="demo" class="collapse">
                      <div class="card-body">
                         <div className='col-12 text-center'>
                         </div>
                         <ul >
-                        <Link to="/">
-                           <li>Home </li>
+                           <Link to="/">
+                              <li>Home </li>
                            </Link>
                            <div className="nav_hr"></div>
-                           <li>Store </li>
+                           <Link to="#Category">
+
+                              <li>Store </li>
+                           </Link>
                            <div className="nav_hr"></div>
-                           <Link to="#Rewards"> 
+                           <Link to="#Rewards">
                               <li>Rewards </li>
                            </Link>
                            <div className="nav_hr"></div>
                            <a href="#Contact">
-                           <li>Contact </li>
+                              <li>Contact </li>
                            </a>
                            <div className="nav_hr"></div>
                            <a href="#About">
@@ -156,7 +285,7 @@ class Contact extends Component {
                            </a>
                            <div className="nav_hr"></div>
                            <Link to="/product">
-                           <li>Explore Product </li>
+                              <li>Explore Product </li>
                            </Link>
                            <div className="nav_hr"></div>
 
@@ -181,11 +310,14 @@ class Contact extends Component {
    }
 
 }
-const mapStatetoProps = ({ auth }) => ({
-   user: auth.user
+const mapStatetoProps = ({ auth, cart }) => ({
+   user: auth.user,
+   cart: cart?.cart
+
 })
 const mapDispatchToProps = ({
-
+   addToCart,
+   removeFromCart,
 })
 Contact.propTypes = {
 };

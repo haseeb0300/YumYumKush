@@ -6,6 +6,10 @@ import Dashboard from '../Dashboard/Dashboard';
 import Product from '../Product/Product';
 import Checkout from '../Checkout/Checkout';
 import Feedback from '../Feedback/Feedback';
+import ProductDetail from '../Product/ProductDetail';
+import DealDetail from '../Product/DealDetail';
+
+
 
 
 
@@ -90,6 +94,10 @@ class AppNavigation extends Component {
                         component={Checkout} />
                        <Route exact path="/feedback"
                         component={Feedback} />
+                           <Route exact path="/productdetail"
+                        component={ProductDetail} />
+                          <Route exact path="/dealdetail"
+                        component={DealDetail} />
                    
                    
                 </Switch>

@@ -9,25 +9,144 @@ import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a lo
 import Header from '../../component/Header'
 import Footer from '../../component/Footer'
 import Lock from '../../assets/images/sideCart/lock.png'
-
+import { createOrder } from '../../store/actions/orderAction';
+import { addToCart, removeFromCart } from '../../store/actions/cartAction';
 
 class Checkout extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
+            errors: {},
+
             serverError: {},
             isLoading: false,
             showModal: false,
+            firstName: '',
+            lastName: '',
+            address: '',
+            email: '',
+            state: '',
+            city: '',
+            postalCode: '',
+            phoneNum: '',
+            price: '',
+            productList: [],
+            dealList: [],
+            cartList: [],
+
 
 
         };
     }
 
     componentDidMount() {
+        this.generateListProductAndDeals();
+    }
+    componentWillMount() {
+
+
+        if (this?.props?.location?.state?.total) {
+            this.setState({
+
+                price: this.props?.location?.state?.total
+            }, () => { console.log(this.state.price) })
+        }
 
     }
+    onChange = (e) => {
+        this.setState({ [e.target.name]: e.target.value })
+    }
 
+    generateListProductAndDeals = () => {
+        this.props.cart.map((item,i) => {
+            var productList = []
+            var dealList = []
+         this.props.cart.map((item, i) => {
+            if (item.InventryId) {
+               productList.push(item)
+            } else {
+               dealList.push(item)
+            }
+            this.setState({ productList: productList, dealList:dealList })
+         }
+         )
+        })
+    }
+
+    onClickOrder = () => {
+        var obj = {
+            // InventryId: this.state.InventryId,
+            firstName: this.state.firstName,
+            lastName: this.state.lastName,
+            address: this.state.address,
+            email: this.state.email,
+            state: this.state.state,
+            city: this.state.city,
+            postalCode: this.state.postalCode,
+            phoneNum: this.state.phoneNum,
+            price: this.state.price,
+            productList: this.state.productList,
+            dealList: this.state.dealList,
+
+
+        }
+        console.log(obj)
+
+        this.setState({
+            isLoading: true
+        })
+
+        this.props.createOrder(obj).then((res) => {
+            console.log(res)
+            if (res.status) {
+                console.log(res)
+                // this.getUpdatedList()
+                this.setState({
+                    firstName: '',
+                    lastName: '',
+                    address: '',
+                    email: '',
+                    state: '',
+                    city: '',
+                    postalCode: '',
+                    phoneNum: '',
+                    price: '',
+                    productList: '',
+
+                })
+                this.props.history.push('/feedback');
+
+                // this.getTitle(this.state.Chapter_ID)
+
+
+            }
+        }).catch((err) => {
+
+            this.setState({ isLoading: false })
+            var validationError = {}
+            var serverError = []
+            console.log(err.hasOwnProperty('validation'))
+
+            if (err.hasOwnProperty('validation')) {
+                console.log(err)
+
+                err.validation.map(obj => {
+                    if (obj.hasOwnProperty('param')) {
+                        validationError[obj["param"]] = obj["msg"]
+                    } else {
+                        serverError = [...serverError, obj]
+                    }
+                    console.log(obj["msg"])
+                });
+                this.setState({ errors: validationError });
+                this.setState({ serverError: serverError });
+            } else {
+                this.setState({ serverError: [{ "msg": "server not responding" }] })
+            }
+        });
+        console.log(obj)
+    }
 
 
 
@@ -35,7 +154,7 @@ class Checkout extends Component {
     render() {
         // const { t, i18n } = this.props
         const { t, i18n, location, user } = this.props
-        const { isLoading } = this.state;
+        const { isLoading, errors } = this.state;
         if (isLoading) {
             return (
                 <div className="loader-large"></div>
@@ -64,34 +183,81 @@ class Checkout extends Component {
                                                 <div className='row'>
                                                     <div className='col-md-6'>
                                                         <p className='poppins_regular BillingCardLabel'>First Name</p>
-                                                        <input className='BillingCardInput' placeholder='Enter Here'></input>
+                                                        <input
+                                                            className='BillingCardInput'
+                                                            placeholder='Enter Here'
+                                                            name="firstName"
+                                                            onChange={this.onChange}
+                                                            value={this.state.firstName}
+                                                        />
+                                                        {errors.firstName && <div className="LoginError">{errors.firstName}</div>}
+
                                                     </div>
                                                     <div className='col-md-6'>
                                                         <p className='poppins_regular BillingCardLabel'>Last Name</p>
-                                                        <input className='BillingCardInput' placeholder='Enter Here'></input>
+                                                        <input
+                                                            className='BillingCardInput'
+                                                            placeholder='Enter Here'
+                                                            name="lastName"
+                                                            onChange={this.onChange}
+                                                            value={this.state.lastName}
+                                                        />
+                                                        {errors.lastName && <div className="LoginError">{errors.lastName}</div>}
+
                                                     </div>
                                                 </div>
                                             </div>
                                             <div className='col-md-12 mt-3'>
 
                                                 <p className='poppins_regular BillingCardLabel'>Email</p>
-                                                <input className='BillingCardInput' placeholder='Enter Here'></input>
+                                                <input
+                                                    className='BillingCardInput'
+                                                    placeholder='Enter Here'
+                                                    name="email"
+                                                    onChange={this.onChange}
+                                                    value={this.state.email}
+                                                />
+                                                {errors.email && <div className="LoginError">{errors.email}</div>}
+
 
                                             </div>
                                             <div className='col-md-12 mt-3'>
                                                 <p className='poppins_regular BillingCardLabel'>Street Address</p>
-                                                <input className='BillingCardInput' placeholder='Enter Here'></input>
+                                                <input
+                                                    className='BillingCardInput'
+                                                    placeholder='Enter Here'
+                                                    name="address"
+                                                    onChange={this.onChange}
+                                                    value={this.state.address}
+                                                />
+                                                {errors.address && <div className="LoginError">{errors.address}</div>}
+
                                             </div>
 
                                             <div className='col-md-12 mt-3'>
                                                 <div className='row'>
                                                     <div className='col-md-6'>
                                                         <p className='poppins_regular BillingCardLabel'>State/Province</p>
-                                                        <input className='BillingCardInput' placeholder='Enter Here'></input>
+                                                        <input className='BillingCardInput'
+                                                            placeholder='Enter Here'
+                                                            name="state"
+                                                            onChange={this.onChange}
+                                                            value={this.state.state}
+                                                        />
+                                                        {errors.state && <div className="LoginError">{errors.state}</div>}
+
                                                     </div>
                                                     <div className='col-md-6'>
                                                         <p className='poppins_regular BillingCardLabel'>City</p>
-                                                        <input className='BillingCardInput' placeholder='Enter Here'></input>
+                                                        <input
+                                                            className='BillingCardInput'
+                                                            placeholder='Enter Here'
+                                                            name="city"
+                                                            onChange={this.onChange}
+                                                            value={this.state.city}
+                                                        />
+                                                        {errors.city && <div className="LoginError">{errors.city}</div>}
+
                                                     </div>
                                                 </div>
                                             </div>
@@ -99,11 +265,26 @@ class Checkout extends Component {
                                                 <div className='row'>
                                                     <div className='col-md-6'>
                                                         <p className='poppins_regular BillingCardLabel'>Zip/Postal Code</p>
-                                                        <input className='BillingCardInput' placeholder='Enter Here'></input>
+                                                        <input className='BillingCardInput' placeholder='Enter Here'
+                                                            name="postalCode"
+                                                            onChange={this.onChange}
+                                                            value={this.state.postalCode}
+                                                        />
+                                                        {errors.postalCode && <div className="LoginError">{errors.postalCode}</div>}
+
+
+
                                                     </div>
                                                     <div className='col-md-6'>
                                                         <p className='poppins_regular BillingCardLabel'>Phone</p>
-                                                        <input className='BillingCardInput' placeholder='Enter Here'></input>
+                                                        <input className='BillingCardInput'
+                                                            placeholder='Enter Here'
+                                                            name="phoneNum"
+                                                            onChange={this.onChange}
+                                                            value={this.state.phoneNum}
+                                                        />
+                                                        {errors.phoneNum && <div className="LoginError">{errors.phoneNum}</div>}
+
                                                     </div>
                                                 </div>
                                             </div>
@@ -146,67 +327,122 @@ class Checkout extends Component {
                                             <p className='poppins_bold BillingCardTitle '>Order Review</p>
                                         </div>
                                         <div></div>
-                                        <div className='col-12'>
-
-                                            <div className='CartItemCard'>
+                                        {this.props.cart.map((item, i) => {
+                                            return (
                                                 <div className='col-12'>
-                                                    <div className='row'>
+                                                    {item.DealId && (
 
-                                                        <div className='col-12 my-auto'>
-                                                            <p className='poppins_bold '>God's Gift Indica</p>
-                                                            <p className='poppins_semibold CartItemCardtext2'>$ 50.00</p>
+                                                        <div className='CartItemCard'>
+                                                            <div className='col-12'>
+                                                                <div className='row'>
+
+                                                                    <>
+
+                                                                    <div className='col-12 my-auto'>
+                                                                            <div className='row'>
+                                                                                <div className='col-5'>
+                                                                                    <img className=' CheckoutCartitemImg' src={item?.DealImages[0]?.imageUrl} />
+
+                                                                                </div>
+                                                                                <div className='col-7'>
+                                                                                    <p className='poppins_bold '>{item?.dealName}</p>
+                                                                                    <p className='poppins_semibold CartItemCardtext2'>{item.dealPrice}</p>
+
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+
+
+                                                                        {/* {item.InventryId && (
+
+                                                                        <div className='col-12 my-auto'>
+                                                                            <p className='poppins_bold '>{item.title}</p>
+                                                                            <p className='poppins_semibold CartItemCardtext2'>{item.price}</p>
+                                                                        </div>
+                                                                    )} */}
+                                                                    </>
+
+                                                                </div>
+                                                            </div>
+
                                                         </div>
+                                                    )}
+                                                    {item.InventryId && (
 
-                                                    </div>
+                                                        <div className='CartItemCard'>
+                                                            <div className='col-12'>
+                                                                <div className='row'>
+
+                                                                    <>
+
+                                                                        <div className='col-12 my-auto'>
+                                                                            <div className='row'>
+                                                                                <div className='col-5'>
+                                                                                    <img className=' CheckoutCartitemImg' src={item?.InventryImages[0]?.imageUrl} />
+
+                                                                                </div>
+                                                                                <div className='col-7'>
+                                                                                    <p className='poppins_bold '>{item.title}</p>
+                                                                                    <p className='poppins_semibold CartItemCardtext2'>{item.price}</p>
+
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+
+                                                                    </>
+
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                    )}
+
                                                 </div>
-
-                                            </div>
-                                        </div>
+                                            )
+                                        })}
                                     </div>
 
                                     <div className='GrandTotalCard'>
                                         <div className='col-12'>
-                                      
-                                        <div className='col-12'>
+
+                                            <div className='col-12'>
 
 
-                                            <div className='col-12 my-auto'>
-                                                <div className='row'>
-                                                    <div className='col-8'>
-                                                        <p className='poppins_bold BillingCardTitle'>Grand Total </p>
+                                                <div className='col-12 my-auto'>
+                                                    <div className='row'>
+                                                        <div className='col-8'>
+                                                            <p className='poppins_bold BillingCardTitle'>Grand Total </p>
 
-                                                    </div>
-                                                    <div className='col-4 text-right'>
-                                                        <p className='poppins_semibold CartItemCardtext2'>$ 50.00</p>
+                                                        </div>
+                                                        <div className='col-4 text-right'>
+                                                            <p className='poppins_semibold CartItemCardtext2'>$ {this.state.price}</p>
 
-                                                    </div>
-                                                </div>
-
-
-                                            </div>
-                                            <div className='col-md-12'>
-                                                        <div className='row'>
-                                                            <div className='col-1 '>
-                                                                <input type="checkbox" name="privacy" value="privacy" /> 
-
-
-                                                            </div>
-                                                            <div className='col-10 '>
-                                                                <p className='poppins_regular BillingCardLabel'>Please check to acknowledge our<label className='primarycolor'>Privacy & Terms Policy</label> </p>
-
-                                                            </div>
                                                         </div>
                                                     </div>
-                                                    <div className='col-md-12 text-center mt-3'>
-                                                    <Link to="/feedback">
 
-                                                    <button className='Paynowbtn'>Pay $3,439.00</button>
-                                                  </Link>
+
+                                                </div>
+                                                <div className='col-md-12'>
+                                                    <div className='row'>
+                                                        <div className='col-1 '>
+                                                            <input type="checkbox" name="privacy" value="privacy" />
+
+
+                                                        </div>
+                                                        <div className='col-10 '>
+                                                            <p className='poppins_regular BillingCardLabel'>Please check to acknowledge our<label className='primarycolor'>Privacy & Terms Policy</label> </p>
+
+                                                        </div>
                                                     </div>
-                                        </div>
+                                                </div>
+                                                <div className='col-md-12 text-center mt-3'>
+
+                                                    <button className='Paynowbtn' onClick={() => this.onClickOrder()}>Pay ${this.state.price}</button>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                    
+
                                 </div>
                             </div>
                         </div>
@@ -227,11 +463,15 @@ class Checkout extends Component {
     }
 
 }
-const mapStatetoProps = ({ auth }) => ({
-    user: auth.user
+const mapStatetoProps = ({ auth, cart }) => ({
+    user: auth.user,
+    cart: cart?.cart
+
 })
 const mapDispatchToProps = ({
-
+    addToCart,
+    removeFromCart,
+    createOrder
 })
 Checkout.propTypes = {
 };
