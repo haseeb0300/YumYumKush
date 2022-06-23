@@ -6,13 +6,7 @@ import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a lo
 import Header from '../../component/Header'
 import section1img from '../../assets/images/dashboard/section1/1.png'
 
-import section2img from '../../assets/images/dashboard/section2/1.png'
-import product1 from '../../assets/images/dashboard/section4/1.png'
-import product2 from '../../assets/images/dashboard/section4/2.png'
-import product3 from '../../assets/images/dashboard/section4/3.png'
-import product4 from '../../assets/images/dashboard/section4/4.png'
-import product5 from '../../assets/images/dashboard/section4/5.png'
-import product6 from '../../assets/images/dashboard/section4/6.png'
+
 import TestimonialImg1 from '../../assets/images/dashboard/section6/1.png'
 import TestimonialImg2 from '../../assets/images/dashboard/section6/2.png'
 import TestimonialImg3 from '../../assets/images/dashboard/section6/3.png'
@@ -21,6 +15,7 @@ import Logo from '../../assets/images/header/Logo.png'
 import envolpe from '../../assets/images/dashboard/section7/envolpe.png'
 import { Link, withRouter } from 'react-router-dom';
 import { getDeal, getInventory, getCategory } from '../../store/actions/productAction';
+import { addToCart, removeFromCart } from '../../store/actions/cartAction';
 
 import Footer from '../../component/Footer'
 
@@ -82,7 +77,7 @@ class Dashboard extends Component {
 
 
       }
-      return this.state.dealList.map((item, i) =>
+      return this.state.dealList.slice(0, 4).map((item, i) =>
          <>
             <div className='col-md-6'>
                <div className='col-md-12'>
@@ -90,7 +85,7 @@ class Dashboard extends Component {
 
                      <div className='row'>
                         <div className='col-md-4'>
-                           <img className='dealImg' src={item.DealImages[i].imageUrl} />
+                           <img className='dealImg' src={item.DealImages[0]?.imageUrl} />
 
                         </div>
                         <div className='col-md-8'>
@@ -115,6 +110,11 @@ class Dashboard extends Component {
 
 
    }
+   onclickCategoryItem = (item) => {
+
+      this.props.history.push('/categoryproduct', { item: item })
+   }
+   
    onclickDealItem = (item) => {
 
       this.props.history.push('/dealdetail', { item: item })
@@ -133,20 +133,17 @@ class Dashboard extends Component {
 
 
       }
-      return this.state.inventoryList.map((item, i) =>
+      return this.state.inventoryList.slice(0, 6).map((item, i) =>
          <>
             <div className='col-md-4'>
 
                   <div className='ExploreCard'  onClick={() => this.onclickInventoryItem(item)}>
                      <p className='poppins_semibold newArrival'>New Arrival</p>
-                     <img className='ExploreCardImg' src={item.InventryImages[i]?.imageUrl} />
+                     <img className='ExploreCardImg' src={item.InventryImages[0]?.imageUrl} />
                      <p className='poppins_bold ExploreCardtext1'>{item.title}</p>
                      <p className='poppins_regular ExploreCardtext2'>{item.status}</p>
                      <p className='poppins_semibold ExploreCardtext3'>$ {item.InventryParams[0]?.price}</p>
-                     {/* <div class="overlayy">
-                        <img className='ExploreCardImg' src={item.InventryImages[i]?.imageUrl} />
-                        <div class="poppins_semibold ExploreCardtext4">Add to cart</div>
-                     </div> */}
+                   
 
                   </div>
             </div>
@@ -167,24 +164,42 @@ class Dashboard extends Component {
 
 
       }
-      return this.state.categoryList.map((item, i) =>
+      return this.state.categoryList.slice(0, 8).map((item, i) =>
          <>
             <div className='col-md-3'>
-               <div className='categoryCard'>
+               <div className='categoryCard' onClick={() => this.onclickCategoryItem(item)}>
                   <p className='categoryCardtext1 poppins_semibold'>{item.title}</p>
-                  <p className='categoryCardtext2 poppins_regular'>30 Products</p>
+                  <p className='categoryCardtext2 poppins_regular'>{item.Inventries.length} Products</p>
                   <p className='categoryCardtext3 poppins_light'>Shop Now</p>
                </div>
             </div>
-
-
          </>
       )
 
 
 
    }
-
+   onClickCart = (product) => {
+      var obj = {
+         ...product,
+         price: this.state.total
+      }
+      let items = this.props.cart.find(item => {
+         console.log(item)
+         return item.InventryId === obj.InventryId
+      })
+      if (!items)
+         this.props.addToCart(obj)
+      else {
+      }
+      this.setState({ showModal: true })
+   }
+   handleClose = () => {
+      this.setState({ showModal: false })
+   }
+   handleCloseModal = () => {
+      this.setState({ showModal: false })
+   }
 
 
 
@@ -199,7 +214,12 @@ class Dashboard extends Component {
       }
       return (
          <>
-            <Header />
+            <Header
+               showModal={this.state.showModal}
+               handleCloseModal={this.handleCloseModal}
+               history={this.props.history}
+            
+            />
             {/* section1 */}
             <section id="Home" className='container section1'>
                <div className='col-md-12 mt-mb-30'>
@@ -210,7 +230,7 @@ class Dashboard extends Component {
                         <p className='text2 poppins_regular'>We strive to provide every customer with a great delivery experience, as well as pride ourselves in having a variety of THC and CBD products to choose from that can be delivered straight to you.</p>
                         <Link to="/product">
 
-                           <button className='btn primarycolor'>Buy Now</button>
+                           <button className='btn primarycolor' >Buy Now</button>
                         </Link>
                         <Link to="/product">
 
@@ -239,14 +259,10 @@ class Dashboard extends Component {
                <div className='col-md-12'>
                   <div className='row'>
                      {this.renderDeals()}
-            
-
-
-
                   </div>
                </div>
                <div className='col-md-12 text-center'>
-                  <Link to="/product">
+                  <Link to="/deals">
 
                      <button className='ExploreBtn'>Explore More</button>
                   </Link>
@@ -265,7 +281,9 @@ class Dashboard extends Component {
                               <p className='text1 poppins_regular'><label className='horizontal-Line'></label> FEATURED PRODUCT <label className='horizontal-Line'></label></p>
                               <p className='heading poppins_bold'>{inventoryList[0]?.title} </p>
                               <p className='poppins_regular text2'>{inventoryList[0]?.description}</p>
-                              <button className='BuyNowBtn'>Buy Now</button>
+                              <p className='poppins_regular heading'>${inventoryList[0]?.InventryParams[0]?.price}</p>
+
+                              <button className='BuyNowBtn' onClick={() => this.onclickInventoryItem(inventoryList[0])}>Buy Now</button>
                            </div>
                            <div className='col-md-4'>
                               <div className='section3InnerCard text-center'>
@@ -328,7 +346,7 @@ class Dashboard extends Component {
                   </div>
                </div>
                <div className='col-md-12 text-center'>
-                  <Link to="/product">
+                  <Link to="/categories">
                      <button className='ExploreBtn'>Explore More</button>
                   </Link>
                </div>
@@ -504,13 +522,17 @@ class Dashboard extends Component {
    }
 
 }
-const mapStatetoProps = ({ auth }) => ({
-   user: auth.user
+const mapStatetoProps = ({ auth,cart }) => ({
+   user: auth.user,
+   cart: cart?.cart
+
 })
 const mapDispatchToProps = ({
    getDeal,
    getInventory,
-   getCategory
+   getCategory,
+   addToCart,
+   removeFromCart
 })
 Dashboard.propTypes = {
 };

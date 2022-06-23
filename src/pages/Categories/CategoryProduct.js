@@ -27,16 +27,26 @@ import { addToCart, removeFromCart } from '../../store/actions/cartAction';
 
 
 import sycrup from '../../assets/images/dashboard/section3/sycrup.svg'
-class DealDetail extends Component {
+class CategoryProduct extends Component {
 
    constructor(props) {
       super(props);
       this.state = {
          errors: {},
          serverError: {},
-         dealList: [],
-         DealId: "",
-        
+         productPriceList: [{ "InventryParamId": v4(), "price": "", "type": "" }],
+         //productImageList: [1],
+         title: '',
+         description: '',
+         status: '',
+         imageList: [{ "InventryImageId": v4(), "imageUrl": "" }],
+         InventryId: '',
+         imageUrl: "",
+         price: "",
+         type: "",
+         InventoryList: [],
+         InventryId: "",
+         CategoryId: "",
          total: 0,
          categoryList: [],
          checkedBoxes: [],
@@ -60,20 +70,27 @@ class DealDetail extends Component {
 
       })
    }
+   onclickInventoryItem = (item) => {
+
+    this.props.history.push('/productdetail', { item: item })
+}
    componentWillMount() {
 
       if (this.props != null && this.props.location.state != null && this.props.location.state.item) {
          console.log(this.props.location.state.item)
 
-         const {  dealList } = this.props?.location?.state?.item
+         const { CategoryId, title, description,Inventries,  InventoryList } = this.props?.location?.state?.item
          this.setState({
-           
-            dealList: this.props?.location?.state?.item
-         }, () => { console.log(this.state.dealList) })
+            CategoryId: CategoryId,
+            title: title,
+            description: description,
+            InventoryList: Inventries
+         }, () => { console.log(this.state.InventoryList) })
       }
    }
+ 
    renderInventory = () => {
-      if (this.state.productList && this.state.productList.length < 1) {
+      if (this.state.InventoryList && this.state.InventoryList.length < 1) {
 
          return () =>
 
@@ -82,13 +99,19 @@ class DealDetail extends Component {
 
 
       }
-      return this.state.productList.map((item, i) =>
+      return this.state.InventoryList.map((item, i) =>
          <>
-            <div className='col-md-4'>
-               <div className='relatedProductCard'>
-                  <img className='RelatedProductImg w-100' src={item.InventryImages[0]?.imageUrl} />
-                  <p className='RelatedProductTitle'>{item.title}</p>
-               </div>
+           <div className='col-md-4'>
+
+                  <div className='ExploreCard'  onClick={() => this.onclickInventoryItem(item)}>
+                     <p className='poppins_semibold newArrival'>New Arrival</p>
+                     <img className='ExploreCardImg' src={item.InventryImages[0]?.imageUrl} />
+                     <p className='poppins_bold ExploreCardtext1'>{item.title}</p>
+                     <p className='poppins_regular ExploreCardtext2'>{item.status}</p>
+                     <p className='poppins_semibold ExploreCardtext3'>$ {item.InventryParams[0]?.price}</p>
+                   
+
+                  </div>
             </div>
 
 
@@ -109,37 +132,39 @@ class DealDetail extends Component {
       }
       this.setState({ total: tempTotal })
    }
-   handleCheckbox = (e, s) => {
-    var tempCheckedBoxes = [...this.state.checkedBoxes];
-    if (e.target.checked) {
-       tempCheckedBoxes.push(s)
-    } else {
-       const index = tempCheckedBoxes.findIndex((ch) => ch.InventryParamId === s.InventryParamId);
-       tempCheckedBoxes.splice(index, 1);
-    }
-    this.setState({
-       checkedBoxes: tempCheckedBoxes
-    }, () => this.handleTotal())
- }
- 
-   onClickCart = (deal) => {
-      console.log(deal)
-      console.log(this.props.cart)
 
+   handleCheckbox = (e, s) => {
+      var tempCheckedBoxes = [...this.state.checkedBoxes];
+      if (e.target.checked) {
+         tempCheckedBoxes.push(s)
+      } else {
+         const index = tempCheckedBoxes.findIndex((ch) => ch.InventryParamId === s.InventryParamId);
+         tempCheckedBoxes.splice(index, 1);
+      }
+      this.setState({
+         checkedBoxes: tempCheckedBoxes
+      }, () => this.handleTotal())
+   }
+
+   handleCloseModal = () => {
+      this.setState({showModal: false})
+   }
+
+   onClickCart = (product) => {
+      var obj = {
+         ...product,
+         price: this.state.total
+      }
       let items = this.props.cart.find(item => {
          console.log(item)
-         return item.DealId === deal.DealId
+         return item.InventryId === obj.InventryId
       })
       if (!items)
-         this.props.addToCart(deal)
+         this.props.addToCart(obj)
       else {
       }
       this.setState({ showModal: true })
    }
-   handleCloseModal = () => {
-    this.setState({showModal: false})
- }
-
 
    render() {
       // const { t, i18n } = this.props
@@ -153,49 +178,28 @@ class DealDetail extends Component {
       return (
          <>
             <Header
-               showModal={this.state.showModal}
-               handleCloseModal= {this.handleCloseModal}
-               history = {this.props.history}
+            showModal={this.state.showModal}
+            handleCloseModal= {this.handleCloseModal}
+            history = {this.props.history}
+
              />
-            <div className='sideCart'>
-             
-            </div>
+          
 
 
             {/* section4 start */}
 
 
-            <div className='ProductDetailContainer'>
-               <div className='col-md-12'>
-                  <div className='row'>
-                     <div className='col-md-4 text-center'>
-                        <div className='productDetailImgContainer'>
+            <div className='ProductDetailContainer container section4'>
+            <div className='col-md-12 mt-mb-30 text-center'>
+                  <div className='centerheading'>
+                     <p className='text1 poppins_regular'><label className='horizontal-Line'></label> Category! <label className='horizontal-Line'></label></p>
+                     <p className='heading poppins_bold'>  <label className='primarycolor'> {this.state.title}</label> </p>
+                     <p className='text2 poppins_light'>Products of {this.state.title}</p>
 
-                           <img className='w-100 productDetailImg' src={this.state.dealList?.DealImages[0]?.imageUrl} />
-
-                        </div>
-                     </div>
-                     <div className='col-md-8 vc'>
-                        <div className='priceContainer'>
-                           <p className='productPrice1 poppins_regular mb-0'>{this.state.dealList?.dealName}</p>
-                           <div className='seprator'></div>
-
-                           {/* <p className='productPrice1 poppins_regular mb-0'>${this.state.dealList.dealPrice}</p> */}
-
-
-                           {/* <div className='seprator'></div> */}
-                            <p className='productPrice1 poppins_regular mb-0'>${this.state.dealList.dealPrice}</p> 
-                           <div className='seprator'></div>
-
-                           <button className='productDetailAddtocart' onClick={() => this.onClickCart(this.state.dealList)}>ADD TO CART</button>
-                        </div>
-
-                     </div>
                   </div>
                </div>
                <div className='col-md-12'>
                   <div className='text-center'>
-                     <p className='poppins_medium RelatedProduct'>You may also love</p>
                   </div>
                   <div className='col-md-12 mt-5 mb-5'>
                      <div className='row'>
@@ -217,7 +221,7 @@ class DealDetail extends Component {
    }
 
 }
-const mapStatetoProps = ({ auth,cart }) => ({
+const mapStatetoProps = ({ auth, cart }) => ({
    user: auth.user,
    cart: cart?.cart
 })
@@ -226,7 +230,7 @@ const mapDispatchToProps = ({
    addToCart,
    removeFromCart
 })
-DealDetail.propTypes = {
+CategoryProduct.propTypes = {
 };
-export default connect(mapStatetoProps, mapDispatchToProps)(DealDetail);
+export default connect(mapStatetoProps, mapDispatchToProps)(CategoryProduct);
 

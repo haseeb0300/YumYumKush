@@ -8,6 +8,10 @@ import Checkout from '../Checkout/Checkout';
 import Feedback from '../Feedback/Feedback';
 import ProductDetail from '../Product/ProductDetail';
 import DealDetail from '../Product/DealDetail';
+import Deals from '../Deals/Deals';
+import Categories from '../Categories/Categories';
+import CategoryProduct from '../Categories/CategoryProduct';
+
 
 
 
@@ -84,12 +88,8 @@ class AppNavigation extends Component {
                 <Switch >
                     <Route exact path="/"
                         component={Dashboard} />
-
-                        
-
                           <Route exact path="/product"
                         component={Product} />
-                   
                    <Route exact path="/checkout"
                         component={Checkout} />
                        <Route exact path="/feedback"
@@ -98,7 +98,14 @@ class AppNavigation extends Component {
                         component={ProductDetail} />
                           <Route exact path="/dealdetail"
                         component={DealDetail} />
-                   
+                         <Route exact path="/deals"
+                        component={Deals} />
+                          <Route exact path="/categories"
+                        component={Categories} />
+                          <Route exact path="/categoryproduct"
+                        component={CategoryProduct} />
+
+
                    
                 </Switch>
                 </ScrollToTop>
