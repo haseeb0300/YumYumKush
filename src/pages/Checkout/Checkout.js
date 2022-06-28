@@ -10,6 +10,7 @@ import Header from '../../component/Header'
 import Footer from '../../component/Footer'
 import Lock from '../../assets/images/sideCart/lock.png'
 import { createOrder } from '../../store/actions/orderAction';
+import { geSingleInventory, geSingleDeal } from '../../store/actions/productAction';
 import { addToCart, removeFromCart } from '../../store/actions/cartAction';
 
 class Checkout extends Component {
@@ -34,6 +35,7 @@ class Checkout extends Component {
             productList: [],
             dealList: [],
             cartList: [],
+            checkItemAvaibility: [],
 
 
 
@@ -43,6 +45,66 @@ class Checkout extends Component {
     componentDidMount() {
         this.generateListProductAndDeals();
     }
+
+    checkQuantityOfProductDeal =  () => {
+        var tempList = []
+        this.props.cart.map(async(item, i) => {
+            var obj = {}
+            if (item.InventryId) {
+                await this.props.geSingleInventory(item.InventryId).then((res) => {
+                    if(res.content.totalQuantity !== 0 && (item.quantityToMinus * item.quantity) <= res.content.totalQuantity){
+                        obj = {
+                            key: item.InventryId,
+                            name: item.title,
+                            status: true,
+                        }
+                        tempList.push(obj)
+                    }else{
+                        obj = {
+                            key: item.InventryId,
+                            name: item.title,
+                            status: false,
+                        }
+                        tempList.push(obj)
+                    }
+                 }).catch((err) => {
+                    console.log(err)
+
+                 })
+            }else{
+                await  this.props.geSingleDeal(item.DealId).then((res) => {
+                    console.log('Deal :', res.content.totalQuantity)
+                    if(res.content.totalQuantity !== 0 && item.quantity <= res.content.totalQuantity){
+                        obj = {
+                            key: item.DealId,
+                            name: item.dealName,
+                            status: true,
+                        }
+                        tempList.push(obj)
+                    }else{
+                        obj = {
+                            key: item.DealId,
+                            name: item.dealName,
+                            status: false,
+                        }
+                        tempList.push(obj)
+                    }
+                 }).catch((err) => {
+                    console.log(err)
+
+                 })
+            }
+            let checkOutOfStock = tempList.some( item => item['status'] === false )
+            if(checkOutOfStock){
+                this.setState({
+                    checkItemAvaibility: tempList
+                },() => {console.log(this.state.checkItemAvaibility)})
+            }else{
+                this.onClickOrder();
+            }
+        })
+    }
+
     componentWillMount() {
 
 
@@ -50,7 +112,7 @@ class Checkout extends Component {
             this.setState({
 
                 price: this.props?.location?.state?.total
-            }, () => { console.log(this.state.price) })
+            })
         }
 
     }
@@ -74,7 +136,8 @@ class Checkout extends Component {
         })
     }
 
-    onClickOrder = () => {
+    onClickOrder = async() => {
+
         var obj = {
             // InventryId: this.state.InventryId,
             firstName: this.state.firstName,
@@ -91,7 +154,6 @@ class Checkout extends Component {
 
 
         }
-        console.log(obj)
 
         this.setState({
             isLoading: true
@@ -443,7 +505,7 @@ class Checkout extends Component {
                                                 </div>
                                                 <div className='col-md-12 text-center mt-3'>
 
-                                                    <button className='Paynowbtn' onClick={() => this.onClickOrder()}>Pay ${this.state.price}</button>
+                                                    <button className='Paynowbtn' onClick={() => this.checkQuantityOfProductDeal()}>Pay ${this.state.price}</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -477,7 +539,9 @@ const mapStatetoProps = ({ auth, cart }) => ({
 const mapDispatchToProps = ({
     addToCart,
     removeFromCart,
-    createOrder
+    createOrder,
+    geSingleInventory,
+    geSingleDeal
 })
 Checkout.propTypes = {
 };

@@ -8,7 +8,7 @@ import { GET_ERRORS} from '../actions/type'
         return Promise.resolve(res.data)
       })
       .catch(err => {
-  
+
         if (err.response.data != null && err.response.data.validation) {
           console.log(err.response.data.validation);
           err = err.response.data
@@ -27,15 +27,40 @@ import { GET_ERRORS} from '../actions/type'
         .get('/api/inventry')
         .then((res) => {
             console.log(res)
-  
+
             return Promise.resolve(res.data)
         }).catch((err) => {
             console.log(err)
             return Promise.reject(err)
         })
-  
-  
   }
+
+  export const geSingleInventory = (InventryId) => dispatch => {
+    return axios
+        .get('/api/single/inventry?InventryId='+ InventryId)
+        .then((res) => {
+            console.log(res)
+
+            return Promise.resolve(res.data)
+        }).catch((err) => {
+            console.log(err)
+            return Promise.reject(err)
+        })
+  }
+
+  export const geSingleDeal = (DealId) => dispatch => {
+    return axios
+        .get('/api/single/deal?DealId='+ DealId)
+        .then((res) => {
+            console.log(res)
+
+            return Promise.resolve(res.data)
+        }).catch((err) => {
+            console.log(err)
+            return Promise.reject(err)
+        })
+  }
+
   export const deleteInventory = inventoryData => dispatch => {
     return axios
       .post('api/remove/inventry', inventoryData)
@@ -43,7 +68,7 @@ import { GET_ERRORS} from '../actions/type'
         return Promise.resolve(res.data)
       })
       .catch(err => {
-  
+
         if (err.response.data != null && err.response.data.validation) {
           console.log(err.response.data.validation);
           err = err.response.data
@@ -64,7 +89,7 @@ import { GET_ERRORS} from '../actions/type'
         return Promise.resolve(res.data)
       })
       .catch(err => {
-  
+
         if (err.response.data != null && err.response.data.validation) {
           console.log(err.response.data.validation);
           err = err.response.data
@@ -83,14 +108,14 @@ import { GET_ERRORS} from '../actions/type'
         .get('/api/deal')
         .then((res) => {
             console.log(res)
-  
+
             return Promise.resolve(res.data)
         }).catch((err) => {
             console.log(err)
             return Promise.reject(err)
         })
-  
-  
+
+
   }
   export const deleteDeal = inventoryData => dispatch => {
     return axios
@@ -99,7 +124,7 @@ import { GET_ERRORS} from '../actions/type'
         return Promise.resolve(res.data)
       })
       .catch(err => {
-  
+
         if (err.response.data != null && err.response.data.validation) {
           console.log(err.response.data.validation);
           err = err.response.data
@@ -122,7 +147,7 @@ import { GET_ERRORS} from '../actions/type'
         return Promise.resolve(res.data)
       })
       .catch(err => {
-  
+
         if (err.response.data != null && err.response.data.validation) {
           console.log(err.response.data.validation);
           err = err.response.data
@@ -141,14 +166,14 @@ import { GET_ERRORS} from '../actions/type'
         .get('/api/category')
         .then((res) => {
             console.log(res)
-  
+
             return Promise.resolve(res.data)
         }).catch((err) => {
             console.log(err)
             return Promise.reject(err)
         })
-  
-  
+
+
   }
   export const deleteCategory = categoryData => dispatch => {
     return axios
@@ -157,7 +182,7 @@ import { GET_ERRORS} from '../actions/type'
         return Promise.resolve(res.data)
       })
       .catch(err => {
-  
+
         if (err.response.data != null && err.response.data.validation) {
           console.log(err.response.data.validation);
           err = err.response.data

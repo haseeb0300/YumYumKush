@@ -58,62 +58,69 @@ class Feedback extends Component {
                 items.push(obj)
             }
         }
-        
+
             var obj1 = {
                 email: email,
                 name: firstName + ' ' + lastName,
                 items: items,
                 OrderId: OrderId
             }
-            console.log(obj1)
-    
-            this.setState({
-                // isLoading: true
-            })
-            const emptyobj = {}
-            this.props.sendMail(obj1).then((res) => {
-                console.log(res)
-                if (res.status) {
-                    console.log(res)
-                    this.setState({
-                        email: this.state.email,
-                        name: this.state.name,
-    
-                    })
-                this.props.emptyCart()
-    
-                    // this.getTitle(this.state.Chapter_ID)
-    
-    
-                }
-            }).catch((err) => {
-    
-                this.setState({ isLoading: false })
-                var validationError = {}
-                var serverError = []
-                console.log(err.hasOwnProperty('validation'))
-    
-                if (err.hasOwnProperty('validation')) {
-                    console.log(err)
-    
-                    err.validation.map(obj => {
-                        if (obj.hasOwnProperty('param')) {
-                            validationError[obj["param"]] = obj["msg"]
-                        } else {
-                            serverError = [...serverError, obj]
-                        }
-                        console.log(obj["msg"])
-                    });
-                    this.setState({ errors: validationError });
-                    this.setState({ serverError: serverError });
-                } else {
-                    this.setState({ serverError: [{ "msg": "server not responding" }] })
-                }
-            });
-            console.log(obj)
-        
+            this.sendMail(obj1);
 
+            var obj2 = {
+                email: 'official.yumyumkush@gmail.com',
+                name: 'Corrie Miller',
+                items: items,
+                OrderId: OrderId
+            }
+            console.log(obj2)
+            const emptyobj = {}
+            this.sendMail(obj2);
     }
+
+    sendMail = (obj) => {
+        console.log(obj)
+        this.props.sendMail(obj).then((res) => {
+            console.log(res)
+            if (res.status) {
+                console.log(res)
+                this.setState({
+                    email: this.state.email,
+                    name: this.state.name,
+
+                })
+            this.props.emptyCart()
+
+                // this.getTitle(this.state.Chapter_ID)
+
+
+            }
+        }).catch((err) => {
+
+            this.setState({ isLoading: false })
+            var validationError = {}
+            var serverError = []
+            console.log(err.hasOwnProperty('validation'))
+
+            if (err.hasOwnProperty('validation')) {
+                console.log(err)
+
+                err.validation.map(obj => {
+                    if (obj.hasOwnProperty('param')) {
+                        validationError[obj["param"]] = obj["msg"]
+                    } else {
+                        serverError = [...serverError, obj]
+                    }
+                    console.log(obj["msg"])
+                });
+                this.setState({ errors: validationError });
+                this.setState({ serverError: serverError });
+            } else {
+                this.setState({ serverError: [{ "msg": "server not responding" }] })
+            }
+        });
+    }
+
     onChange = (e) => {
         this.setState({ [e.target.name]: e.target.value })
     }
