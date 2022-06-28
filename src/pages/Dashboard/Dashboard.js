@@ -30,6 +30,8 @@ class Dashboard extends Component {
          dealList: [],
          inventoryList: [],
          categoryList: [],
+         showModal: false,
+
 
 
       };

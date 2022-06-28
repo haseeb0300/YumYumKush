@@ -97,6 +97,8 @@ class Checkout extends Component {
             isLoading: true
         })
 
+        var orderDetail = {}
+
         this.props.createOrder(obj).then((res) => {
             console.log(res)
             if (res.status) {
@@ -115,7 +117,11 @@ class Checkout extends Component {
                     productList: '',
 
                 })
-                this.props.history.push('/feedback');
+                orderDetail = {
+                    content: res.content,
+                    cart: this.props.cart
+                }
+                this.props.history.push('/feedback',{'item': orderDetail});
 
                 // this.getTitle(this.state.Chapter_ID)
 
@@ -346,7 +352,7 @@ class Checkout extends Component {
                                                                                 </div>
                                                                                 <div className='col-7'>
                                                                                     <p className='poppins_bold '>{item?.dealName}</p>
-                                                                                    <p className='poppins_semibold CartItemCardtext2'>{item.dealPrice}</p>
+                                                                                    <p className='poppins_semibold CartItemCardtext2'>{item.dealPrice *item?.quantity}</p>
 
                                                                                 </div>
                                                                             </div>
@@ -383,7 +389,7 @@ class Checkout extends Component {
                                                                                 </div>
                                                                                 <div className='col-7'>
                                                                                     <p className='poppins_bold '>{item.title}</p>
-                                                                                    <p className='poppins_semibold CartItemCardtext2'>{item.price}</p>
+                                                                                    <p className='poppins_semibold CartItemCardtext2'>$ {item.price *item?.quantity }</p>
 
                                                                                 </div>
                                                                             </div>

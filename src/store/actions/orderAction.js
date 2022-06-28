@@ -25,14 +25,13 @@ import { GET_ERRORS} from '../actions/type'
   };
   export const sendMail = mailData => dispatch => {
     return axios
-      .post('send/mail', mailData)
+      .post('api/send/mail', mailData)
       .then(res => {
         return Promise.resolve(res.data)
       })
       .catch(err => {
   
         if (err.response.data != null && err.response.data.validation) {
-          console.log(err.response.data.validation);
           err = err.response.data
         } else {
           err = { "msg": "Something went wrong" }

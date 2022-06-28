@@ -8,8 +8,9 @@ import { Modal } from 'react-bootstrap';
 
 import Logo from '../assets/images/header/Logo.png'
 import Cart from '../assets/images/header/Cart.svg'
-import { addToCart, removeFromCart } from '../store/actions/cartAction';
+import { addToCart, removeFromCart,updateQuantity } from '../store/actions/cartAction';
 import { ThemeProvider } from 'react-bootstrap';
+import { getCartQuanitityAndAmount } from '../store/reducers/cart';
 
 
 
@@ -22,13 +23,15 @@ class Contact extends Component {
          serverError: {},
          isLoading: false,
          newBookList: [],
-         total: 0
+         total: 0,
+         showModal: false,
+
 
       };
    }
 
    componentDidUpdate(prevProps, prevState) {
-      if (prevProps.cart !== this.props.cart) {
+      if (JSON.stringify(prevProps.cart) !== JSON.stringify(this.props.cart)) {
          var tmptotal = 0
          this.props.cart.map((item, i) => {
             if (item.InventryId) {
@@ -52,7 +55,16 @@ class Contact extends Component {
    }
    onClickPay = () => {
 
-      this.props.history.push('/checkout',{total: this.state.total})
+      this.props.history.push('/checkout',{total: this.props.total})
+   }
+   _updateQuantity = (item,quantity) =>{
+
+      let payloadItem = {
+         ...item,
+         quantity:item.quantity + quantity
+      }
+      this.props.updateQuantity(payloadItem)
+
    }
    render() {
       // const { t, i18n } = this.props
@@ -109,12 +121,15 @@ class Contact extends Component {
                                              </div>
                                              <div className='col-md-6 my-auto text-center'>
                                                 <p className='poppins_bold CartItemCardtext1'>{item?.dealName}</p>
-                                                <p className='poppins_semibold CartItemCardtext2'>${item?.dealPrice}</p>
+                                                <p className='poppins_semibold CartItemCardtext2'>${item?.dealPrice * item?.quantity }</p>
                                              </div>
                                              <div className='col-md-3 text-center my-auto p-0'>
-                                                <label className='poppins_bold addBtn'>-</label>
-                                                <label className='mr-1 ml-1 poppins_bold'>1</label>
-                                                <label className='poppins_bold addBtn'>+</label>
+                                                <label className='poppins_bold addBtn' onClick={ () =>this._updateQuantity(item,-1)}>-</label>
+                                                <label style={{
+                                                   fontSize:18,
+                                                   color:"#000"
+                                                }} className='mr-1 ml-1 poppins_bold CartItemCardtext1'>{item?.quantity}</label>
+                                                <label className='poppins_bold addBtn'  onClick={ () =>this._updateQuantity(item,1)}>+</label>
                                              </div>
                                           </div>
                                        )}
@@ -125,13 +140,14 @@ class Contact extends Component {
                                              </div>
                                              <div className='col-md-6 my-auto text-center'>
                                                 <p className='poppins_bold CartItemCardtext1'>{item.title}</p>
-                                                <p className='poppins_semibold CartItemCardtext2'>$ {item.price}</p>
+                                                <p className='poppins_semibold CartItemCardtext2'>$ {item.price *item?.quantity }</p>
                                              </div>
                                              <div className='col-md-3 text-center my-auto p-0'>
-                                                <label className='poppins_bold addBtn'>-</label>
-                                                <label className='mr-1 ml-1 poppins_bold'>1</label>
-                                                <label className='poppins_bold addBtn'>+</label>
+                                                <label className='poppins_bold addBtn' onClick={ () =>this._updateQuantity(item,-1)}>-</label>
+                                                <label className='mr-1 ml-1 poppins_bold CartItemCardtext1'>{item?.quantity}</label>
+                                                <label className='poppins_bold addBtn'  onClick={ () =>this._updateQuantity(item,1)}>+</label>
                                              </div>
+ 
                                           </div>
                                        )}
                                     </div>
@@ -148,7 +164,7 @@ class Contact extends Component {
                               <div className='row'>
                                  <div className="col-4 my-auto">
                                     <p className='poppins_regular CartBottomText1 '>Total</p>
-                                    <p className='poppins_regular poppins_semibold CartBottomText2'>$ {this.state.total}</p>
+                                    <p className='poppins_regular poppins_semibold CartBottomText2'>$ {this.props.total}</p>
 
                                  </div>
                                  <div className="col-8 text-right my-auto">
@@ -230,7 +246,7 @@ class Contact extends Component {
                               </Link>
                            </div>
                            <div className='my-auto ml-4 mr-4'>
-                              <img src={Cart} />
+                              <img  onClick={() => this.props.showModal} src={Cart} />
                            </div>
                         </div>
 
@@ -312,12 +328,15 @@ class Contact extends Component {
 }
 const mapStatetoProps = ({ auth, cart }) => ({
    user: auth.user,
-   cart: cart?.cart
+   cart: cart?.cart,
+   total:getCartQuanitityAndAmount(cart)?.total
 
 })
 const mapDispatchToProps = ({
    addToCart,
    removeFromCart,
+   updateQuantity
+   
 })
 Contact.propTypes = {
 };

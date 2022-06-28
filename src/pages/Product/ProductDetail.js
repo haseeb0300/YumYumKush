@@ -43,10 +43,12 @@ class ProductDetail extends Component {
          isLoading: false,
          showModal: false,
          productList: [],
+         quantityTotal: 0,
 
 
       };
    }
+
 
    componentDidMount() {
       this.props.getInventory().then((res) => {
@@ -77,6 +79,7 @@ class ProductDetail extends Component {
          }, () => { console.log(this.state.inventoryItem) })
       }
    }
+   
 
    renderInventory = () => {
       if (this.state.productList && this.state.productList.length < 1) {
@@ -92,7 +95,7 @@ class ProductDetail extends Component {
          <>
             <div className='col-md-4'>
 
-               <div className='ExploreCard' onClick={() => this.setState({inventoryItem: item})} >
+               <div className='ExploreCard' onClick={() => this.setState({inventoryItem: item, total: 0, checkedBoxes: []})} >
                   <p className='poppins_semibold newArrival'>New Arrival</p>
                   <img className='ExploreCardImg' src={item.InventryImages[0]?.imageUrl} />
                   <p className='poppins_bold ExploreCardtext1'>{item.title}</p>
@@ -116,10 +119,12 @@ class ProductDetail extends Component {
 
    handleTotal = () => {
       var tempTotal = 0
+      var tempQuantityTotal = 0
       for (var i = 0; i < this.state.checkedBoxes.length; i++) {
          tempTotal = tempTotal + parseInt(this.state.checkedBoxes[i].price)
+         tempQuantityTotal = tempQuantityTotal + parseInt(this.state.checkedBoxes[i].type.replace('g',''))
       }
-      this.setState({ total: tempTotal })
+      this.setState({ total: tempTotal, quantityTotal: tempQuantityTotal })
    }
 
    handleCheckbox = (e, s) => {
@@ -142,8 +147,11 @@ class ProductDetail extends Component {
    onClickCart = (product) => {
       var obj = {
          ...product,
-         price: this.state.total
+         InventryId: product.InventryId,
+         price: this.state.total,
+         quantityToMinus: this.state.quantityTotal
       }
+      console.log(obj)
       let items = this.props.cart.find(item => {
          console.log(item)
          return item.InventryId === obj.InventryId
