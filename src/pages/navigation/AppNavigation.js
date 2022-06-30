@@ -13,7 +13,7 @@ import Categories from '../Categories/Categories';
 import CategoryProduct from '../Categories/CategoryProduct';
 
 
-
+import Header from '../../component/Header';
 
 
 
@@ -73,7 +73,33 @@ if (localStorage.jwtToken) {
     }
 }
 
+
+
 class AppNavigation extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+           serverError: {},
+           isLoading: false,
+           dealList: [],
+           inventoryList: [],
+           categoryList: [],
+           showModal: false,
+  
+  
+  
+        };
+     }
+
+    handleClose = () => {
+        this.setState({ showModal: false })
+     }
+    
+     toogleModal = () => {
+        this.setState({ showModal: !this.state.showModal })
+     }
+  
     render() {
         const { user } = this.props
         console.log(user)
@@ -82,32 +108,33 @@ class AppNavigation extends Component {
 
             <Router >
 
-{/* { user.Full_Name && <UserHeader />} */}
-                
-<ScrollToTop> 
-                <Switch >
-                    <Route exact path="/"
-                        component={Dashboard} />
-                          <Route exact path="/product"
-                        component={Product} />
-                   <Route exact path="/checkout"
-                        component={Checkout} />
-                       <Route exact path="/feedback"
-                        component={Feedback} />
-                           <Route exact path="/productdetail"
-                        component={ProductDetail} />
-                          <Route exact path="/dealdetail"
-                        component={DealDetail} />
-                         <Route exact path="/deals"
-                        component={Deals} />
-                          <Route exact path="/categories"
-                        component={Categories} />
-                          <Route exact path="/categoryproduct"
-                        component={CategoryProduct} />
+                {/* { user.Full_Name && <UserHeader />} */}
+
+                <ScrollToTop>
+                 
+                    <Switch >
+                        <Route exact path="/"
+                            component={Dashboard} />
+                        <Route exact path="/product"
+                            component={Product} />
+                        <Route exact path="/checkout"
+                            component={Checkout} />
+                        <Route exact path="/feedback"
+                            component={Feedback} />
+                        <Route exact path="/productdetail"
+                            component={ProductDetail} />
+                        <Route exact path="/dealdetail"
+                            component={DealDetail} />
+                        <Route exact path="/deals"
+                            component={Deals} />
+                        <Route exact path="/categories"
+                            component={Categories} />
+                        <Route exact path="/categoryproduct"
+                            component={CategoryProduct} />
 
 
-                   
-                </Switch>
+
+                    </Switch>
                 </ScrollToTop>
 
             </Router >

@@ -93,7 +93,16 @@ class Deals extends Component {
 }
 
 
+handleClose = () => {
+   this.setState({ showModal: false })
+}
+handleCloseModal = () => {
+   this.setState({ showModal: false })
+}
 
+toogleModal = () => {
+   this.setState({ showModal: true })
+}
 
    render() {
       // const { t, i18n } = this.props
@@ -104,10 +113,16 @@ class Deals extends Component {
             <div className="loader-large"></div>
          )
       }
+      
       return (
          <>
-            <Header />
-         
+            <Header
+                        showModal={this.state.showModal}
+                        history={this.props.history}
+                        toogleModal={this.toogleModal}
+                        handleClose={this.handleClose}
+
+                    />
             {/* section2 */}
             <section className='container section2'>
                <div className='col-md-12 mt-mb-30 text-center'>

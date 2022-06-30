@@ -203,6 +203,10 @@ class Dashboard extends Component {
       this.setState({ showModal: false })
    }
 
+   toogleModal = () => {
+      this.setState({ showModal: true })
+   }
+
 
 
    render() {
@@ -216,12 +220,13 @@ class Dashboard extends Component {
       }
       return (
          <>
-            <Header
-               showModal={this.state.showModal}
-               handleCloseModal={this.handleCloseModal}
-               history={this.props.history}
-            
-            />
+           <Header
+                        showModal={this.state.showModal}
+                        history={this.props.history}
+                        toogleModal={this.toogleModal}
+                        handleClose={this.handleClose}
+
+                    />
             {/* section1 */}
             <section id="Home" className='container section1'>
                <div className='col-md-12 mt-mb-30'>

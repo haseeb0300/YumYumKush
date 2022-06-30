@@ -73,7 +73,16 @@ class Categories extends Component {
 
    this.props.history.push('/categoryproduct', { item: item })
 }
+handleClose = () => {
+   this.setState({ showModal: false })
+}
+handleCloseModal = () => {
+   this.setState({ showModal: false })
+}
 
+toogleModal = () => {
+   this.setState({ showModal: true })
+}
 
 
 
@@ -88,8 +97,13 @@ class Categories extends Component {
       }
       return (
          <>
-            <Header />
-         
+            <Header
+                        showModal={this.state.showModal}
+                        history={this.props.history}
+                        toogleModal={this.toogleModal}
+                        handleClose={this.handleClose}
+
+                    />
             {/* section2 */}
             <section id="Category" className='container section5'>
                <div className='col-md-12 mt-mb-30 text-center'>

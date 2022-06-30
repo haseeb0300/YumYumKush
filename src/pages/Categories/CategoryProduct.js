@@ -166,6 +166,16 @@ class CategoryProduct extends Component {
       this.setState({ showModal: true })
    }
 
+   handleClose = () => {
+      this.setState({ showModal: false })
+   }
+   handleCloseModal = () => {
+      this.setState({ showModal: false })
+   }
+
+   toogleModal = () => {
+      this.setState({ showModal: true })
+   }
    render() {
       // const { t, i18n } = this.props
       const { t, i18n, location, user } = this.props
@@ -177,13 +187,14 @@ class CategoryProduct extends Component {
       }
       return (
          <>
-            <Header
-            showModal={this.state.showModal}
-            handleCloseModal= {this.handleCloseModal}
-            history = {this.props.history}
+       
+       <Header
+                        showModal={this.state.showModal}
+                        history={this.props.history}
+                        toogleModal={this.toogleModal}
+                        handleClose={this.handleClose}
 
-             />
-          
+                    />
 
 
             {/* section4 start */}

@@ -140,7 +140,16 @@ class DealDetail extends Component {
     this.setState({showModal: false})
  }
 
+ handleClose = () => {
+   this.setState({ showModal: false })
+}
+handleCloseModal = () => {
+   this.setState({ showModal: false })
+}
 
+toogleModal = () => {
+   this.setState({ showModal: true })
+}
    render() {
       // const { t, i18n } = this.props
       const { t, i18n, location, user } = this.props
@@ -150,13 +159,17 @@ class DealDetail extends Component {
             <div className="loader-large"></div>
          )
       }
+      
       return (
          <>
-            <Header
-               showModal={this.state.showModal}
-               handleCloseModal= {this.handleCloseModal}
-               history = {this.props.history}
-             />
+          <Header
+                        showModal={this.state.showModal}
+                        history={this.props.history}
+                        toogleModal={this.toogleModal}
+                        handleClose={this.handleClose}
+
+
+                    />
             <div className='sideCart'>
              
             </div>

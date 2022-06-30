@@ -193,7 +193,6 @@ class Feedback extends Component {
         }
         return (
             <>
-                <Header />
                 <section className=''>
                     <div className='col-md-12'>
                         <div className='row'>

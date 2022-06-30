@@ -98,7 +98,16 @@ class Product extends Component {
    }
 
 
+   handleClose = () => {
+      this.setState({ showModal: false })
+   }
+   handleCloseModal = () => {
+      this.setState({ showModal: false })
+   }
 
+   toogleModal = () => {
+      this.setState({ showModal: true })
+   }
 
 
    render() {
@@ -110,12 +119,17 @@ class Product extends Component {
             <div className="loader-large"></div>
          )
       }
+
       return (
          <>
-            <Header />
-          
+        
+        <Header
+                        showModal={this.state.showModal}
+                        history={this.props.history}
+                        toogleModal={this.toogleModal}
+                        handleClose={this.handleClose}
 
-
+                    />
             {/* section4 start */}
             <section className=' section4'>
                <div className="col-md-12 productPage">

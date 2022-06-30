@@ -85,7 +85,7 @@ class Contact extends Component {
                <div className='sideCart'>
                   <Modal
 
-                     onHide={() => this.props.handleCloseModal()}
+                     onHide={() => this.props.handleClose()}
                      dialogClassName="col-xl-12  sideCart   "
                      show={this.props.showModal}
                      size="lg"
@@ -100,7 +100,7 @@ class Contact extends Component {
                            <div className='cartTop'>
                               <div className='row m-0'>
                                  <div className='col-8 p-0 poppins_bold'><p>Cart</p></div>
-                                 <div className='col-4 text-right p-0' onClick={() => this.props.handleCloseModal()}><p>x</p></div>
+                                 <div className='col-4 text-right p-0' onClick={() => this.props.toogleModal()}><p>x</p></div>
 
                               </div>
 
@@ -245,8 +245,8 @@ class Contact extends Component {
                                  <button className='header_btn'>Explore Product</button>
                               </Link>
                            </div>
-                           <div className='my-auto ml-4 mr-4'>
-                              <img  onClick={() => this.props.showModal} src={Cart} />
+                           <div className='my-auto ml-4 mr-4' onClick={() => this.props.toogleModal()}>
+                              <img   src={Cart} />
                            </div>
                         </div>
 

@@ -44,6 +44,7 @@ class ProductDetail extends Component {
          showModal: false,
          productList: [],
          quantityTotal: 0,
+         activeTab: 0,
 
 
       };
@@ -60,6 +61,11 @@ class ProductDetail extends Component {
       }).catch((err) => {
          console.log(err)
 
+      })
+   }
+   onClickSelection = (val) => {
+      this.setState({
+         activeTab: val
       })
    }
    componentWillMount() {
@@ -79,7 +85,7 @@ class ProductDetail extends Component {
          }, () => { console.log(this.state.inventoryItem) })
       }
    }
-   
+
 
    renderInventory = () => {
       if (this.state.productList && this.state.productList.length < 1) {
@@ -95,7 +101,7 @@ class ProductDetail extends Component {
          <>
             <div className='col-md-4'>
 
-               <div className='ExploreCard' onClick={() => this.setState({inventoryItem: item, total: 0, checkedBoxes: []})} >
+               <div className='ExploreCard' onClick={() => this.setState({ inventoryItem: item, total: 0, checkedBoxes: [] })} >
                   <p className='poppins_semibold newArrival'>New Arrival</p>
                   <img className='ExploreCardImg' src={item.InventryImages[0]?.imageUrl} />
                   <p className='poppins_bold ExploreCardtext1'>{item.title}</p>
@@ -122,10 +128,12 @@ class ProductDetail extends Component {
       var tempQuantityTotal = 0
       for (var i = 0; i < this.state.checkedBoxes.length; i++) {
          tempTotal = tempTotal + parseInt(this.state.checkedBoxes[i].price)
-         tempQuantityTotal = tempQuantityTotal + parseInt(this.state.checkedBoxes[i].type.replace('g',''))
+         tempQuantityTotal = tempQuantityTotal + parseInt(this.state.checkedBoxes[i].type.replace('g', ''))
       }
       this.setState({ total: tempTotal, quantityTotal: tempQuantityTotal })
    }
+
+
 
    handleCheckbox = (e, s) => {
       var tempCheckedBoxes = [...this.state.checkedBoxes];
@@ -162,6 +170,16 @@ class ProductDetail extends Component {
       }
       this.setState({ showModal: true })
    }
+   handleClose = () => {
+      this.setState({ showModal: false })
+   }
+   handleCloseModal = () => {
+      this.setState({ showModal: false })
+   }
+
+   toogleModal = () => {
+      this.setState({ showModal: true })
+   }
 
    render() {
       // const { t, i18n } = this.props
@@ -174,17 +192,19 @@ class ProductDetail extends Component {
       }
       return (
          <>
-            <Header
-               showModal={this.state.showModal}
-               handleCloseModal={this.handleCloseModal}
-               history={this.props.history}
 
-            />
 
 
 
             {/* section4 start */}
+            <Header
+               showModal={this.state.showModal}
+               history={this.props.history}
+               toogleModal={this.toogleModal}
+               handleClose={this.handleClose}
 
+
+            />
 
             <div className='ProductDetailContainer'>
                <div className='col-md-12'>
@@ -211,8 +231,22 @@ class ProductDetail extends Component {
                            <div className='seprator'></div>
                            <p className='productPrice1 poppins_bold mb-0'>{'$' + this.state.total} </p>
                            <div className='seprator'></div>
+                           {/* {this.state.activeTab === 1 || this.state.checkedBoxes.length > 0 ? (
+                              <p className='QuantityError'>Please Select Quantity</p>
+                            ):
+                            <p></p>
+                           } */}
+                           {this.state.checkedBoxes.length > 0 ? (
+                              <button className='productDetailAddtocart' onClick={() => this.onClickCart(this.state.inventoryItem)}>ADD TO CART</button>
+                           ) :
+                           <>
+                           <p className='QuantityError'>Please Select Quantity</p>
 
-                           <button className='productDetailAddtocart' onClick={() => this.onClickCart(this.state.inventoryItem)}>ADD TO CART</button>
+                              <button className='productDetailAddtocart'>ADD TO Cart</button>
+                              </>
+                           }
+
+
                         </div>
 
                      </div>

@@ -46,64 +46,79 @@ class Checkout extends Component {
         this.generateListProductAndDeals();
     }
 
-    checkQuantityOfProductDeal =  () => {
+    checkQuantityOfProductDeal = async () => {
+        
         var tempList = []
-        this.props.cart.map(async(item, i) => {
-            var obj = {}
-            if (item.InventryId) {
-                await this.props.geSingleInventory(item.InventryId).then((res) => {
-                    if(res.content.totalQuantity !== 0 && (item.quantityToMinus * item.quantity) <= res.content.totalQuantity){
-                        obj = {
-                            key: item.InventryId,
-                            name: item.title,
-                            status: true,
+        const promises = await this.props.cart.map(async(item, i) => {
+            return new Promise (async (resolve,reject)=>{
+                var obj = {}
+                if (item.InventryId) {
+                    await this.props.geSingleInventory(item.InventryId).then((res) => {
+                        if(res.content.totalQuantity !== 0 && (item.quantityToMinus * item.quantity) <= res.content.totalQuantity){
+                            obj = {
+                                key: item.InventryId,
+                                name: item.title,
+                                status: true,
+                            }
+                            tempList.push(obj)
+                        }else{
+                            obj = {
+                                key: item.InventryId,
+                                name: item.title,
+                                status: false,
+                            }
+                            tempList.push(obj)
                         }
-                        tempList.push(obj)
-                    }else{
-                        obj = {
-                            key: item.InventryId,
-                            name: item.title,
-                            status: false,
+                        resolve()
+                     }).catch((err) => {
+                        console.log(err)
+                        reject(err)
+                     })
+                }else{
+                     await this.props.geSingleDeal(item.DealId).then((res) => {
+                        console.log('Deal :', res.content.totalQuantity)
+                        if(res.content.totalQuantity !== 0 && item.quantity <= res.content.totalQuantity){
+                            obj = {
+                                key: item.DealId,
+                                name: item.dealName,
+                                status: true,
+                            }
+                            tempList.push(obj)
+                            
+                        }else{
+                            obj = {
+                                key: item.DealId,
+                                name: item.dealName,
+                                status: false,
+                            }
+                            tempList.push(obj)
+                            
                         }
-                        tempList.push(obj)
-                    }
-                 }).catch((err) => {
-                    console.log(err)
-
-                 })
-            }else{
-                await  this.props.geSingleDeal(item.DealId).then((res) => {
-                    console.log('Deal :', res.content.totalQuantity)
-                    if(res.content.totalQuantity !== 0 && item.quantity <= res.content.totalQuantity){
-                        obj = {
-                            key: item.DealId,
-                            name: item.dealName,
-                            status: true,
-                        }
-                        tempList.push(obj)
-                    }else{
-                        obj = {
-                            key: item.DealId,
-                            name: item.dealName,
-                            status: false,
-                        }
-                        tempList.push(obj)
-                    }
-                 }).catch((err) => {
-                    console.log(err)
-
-                 })
-            }
-            let checkOutOfStock = tempList.some( item => item['status'] === false )
-            if(checkOutOfStock){
-                this.setState({
-                    checkItemAvaibility: tempList
-                },() => {console.log(this.state.checkItemAvaibility)})
-            }else{
-                this.onClickOrder();
-            }
+                        resolve()
+                     }).catch((err) => {
+                        console.log(err)
+                        reject(err)
+    
+                     })
+                }
+            })
+          
+           
         })
+        await Promise.all(promises)
+
+ 
+        console.log(tempList)
+        let checkOutOfStock =  tempList.some( item => item['status'] === false )
+        if(checkOutOfStock){
+            this.setState({
+                checkItemAvaibility: tempList
+            },() => {console.log(this.state.checkItemAvaibility)})
+        }else{
+            this.onClickOrder();
+        }
     }
+
 
     componentWillMount() {
 
@@ -137,7 +152,6 @@ class Checkout extends Component {
     }
 
     onClickOrder = async() => {
-
         var obj = {
             // InventryId: this.state.InventryId,
             firstName: this.state.firstName,
@@ -215,7 +229,16 @@ class Checkout extends Component {
         });
         console.log(obj)
     }
-
+    handleClose = () => {
+        this.setState({ showModal: false })
+     }
+     handleCloseModal = () => {
+        this.setState({ showModal: false })
+     }
+  
+     toogleModal = () => {
+        this.setState({ showModal: true })
+     }
 
 
 
@@ -228,9 +251,16 @@ class Checkout extends Component {
                 <div className="loader-large"></div>
             )
         }
+      
         return (
             <>
-                <Header />
+               <Header
+                        showModal={this.state.showModal}
+                        history={this.props.history}
+                        toogleModal={this.toogleModal}
+                        handleClose={this.handleClose}
+
+                    />
                 <section className='container'>
                     <div className='checkoutContainer'>
                         <div className='col-md-12 mt-mb-30 text-center'>
@@ -358,6 +388,12 @@ class Checkout extends Component {
                                             </div>
                                         </div>
                                     </div>
+                                    {this.state.checkItemAvaibility.length > 0 && this.state.checkItemAvaibility.map((item,i)=>{
+                                        return(
+                                            <div>{item.name}</div>
+                                        )
+                                    }) }
+                                    
                                     <div className='col-md-12'>
 
                                         <div className='PaymentCard'>
