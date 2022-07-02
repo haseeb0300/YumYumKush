@@ -28,6 +28,6 @@ jobs:
       env:
           SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
           SOURCE: "build/"
-          REMOTE_HOST: "ec2-107-20-9-220.compute-1.amazonaws.com"
+          REMOTE_HOST: "ec2-54.183.193.37.compute-1.amazonaws.com"
           REMOTE_USER: "ubuntu"
           TARGET: "/var/www/yumyumkush_frontend/"
