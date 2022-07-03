@@ -46,12 +46,9 @@ import jwt_decode from 'jwt-decode';
 
 import { logoutUser, setCurrentUser } from '../../store/actions/authAction';
 if (process.env.NODE_ENV === 'production') {
-    axios.defaults.baseURL = 'https://littlebookcompany.net:3002/v1';
+    axios.defaults.baseURL = 'https://api.yumyumkushh.com/v1';
 } else {
-    // axios.defaults.baseURL = 'http://localhost:4002/v1';
-    axios.defaults.baseURL = 'http://54.183.193.37:4002/v1';
-
-    
+    axios.defaults.baseURL = 'https://api.yumyumkushh.com/';
 }
 axios.defaults.headers.post['Content-Type'] = 'application/json';
 if (localStorage.jwtToken) {
