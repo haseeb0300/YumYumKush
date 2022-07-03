@@ -214,6 +214,10 @@ $TitleSize : 14px;
         border-radius: 20px;
         padding: 50px;
         border: 1px solid white;
+        .featureImg{
+            height: 392px;
+        
+        }
     }
 
     .horizontal-Line {
@@ -302,7 +306,7 @@ $TitleSize : 14px;
     }
 
     .ExploreCard {
-        padding: 50px;
+        padding: 50px 0px;
         width: 100%;
         background: black;
         border-radius: 20px;
@@ -346,9 +350,13 @@ $TitleSize : 14px;
     top: 35px;
 }
     .ExploreCardtext1 {
-        font-size: 21px;
+        font-size: 20px;
         color: white;
         margin-top: 10px;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+        width: 100%;
     }
 
     .ExploreCardtext2 {
@@ -476,6 +484,10 @@ $TitleSize : 14px;
         width: 40%;
         height: 300px;
     }
+    .logoimg1{
+        width: 40%;
+        height: 300px;
+    }
 
     .heading {
         font-size: $HeadingSize;
@@ -595,13 +607,23 @@ $TitleSize : 14px;
 
         }
         .section3InnerCard{
-            display: none;
+            height: 100%;
+            width: 100%;
+            margin: 0px;
+            display: block;
+            background: none;
+            box-shadow: none;
+
         }
         .Section3Card{
             width: 100%;
             text-align: center;
             padding: 50px 10px;
+            height: 100%;
 
+        }
+        .Section3Card .featureImg {
+             height: 180px; 
         }
     }
     .section4 {

@@ -47,21 +47,21 @@ class Checkout extends Component {
     }
 
     checkQuantityOfProductDeal = async () => {
-        
+
         var tempList = []
-        const promises = await this.props.cart.map(async(item, i) => {
-            return new Promise (async (resolve,reject)=>{
+        const promises = await this.props.cart.map(async (item, i) => {
+            return new Promise(async (resolve, reject) => {
                 var obj = {}
                 if (item.InventryId) {
                     await this.props.geSingleInventory(item.InventryId).then((res) => {
-                        if(res.content.totalQuantity !== 0 && (item.quantityToMinus * item.quantity) <= res.content.totalQuantity){
+                        if (res.content.totalQuantity !== 0 && (item.quantityToMinus * item.quantity) <= res.content.totalQuantity) {
                             obj = {
                                 key: item.InventryId,
                                 name: item.title,
                                 status: true,
                             }
                             tempList.push(obj)
-                        }else{
+                        } else {
                             obj = {
                                 key: item.InventryId,
                                 name: item.title,
@@ -70,51 +70,51 @@ class Checkout extends Component {
                             tempList.push(obj)
                         }
                         resolve()
-                     }).catch((err) => {
+                    }).catch((err) => {
                         console.log(err)
                         reject(err)
-                     })
-                }else{
-                     await this.props.geSingleDeal(item.DealId).then((res) => {
+                    })
+                } else {
+                    await this.props.geSingleDeal(item.DealId).then((res) => {
                         console.log('Deal :', res.content.totalQuantity)
-                        if(res.content.totalQuantity !== 0 && item.quantity <= res.content.totalQuantity){
+                        if (res.content.totalQuantity !== 0 && item.quantity <= res.content.totalQuantity) {
                             obj = {
                                 key: item.DealId,
                                 name: item.dealName,
                                 status: true,
                             }
                             tempList.push(obj)
-                            
-                        }else{
+
+                        } else {
                             obj = {
                                 key: item.DealId,
                                 name: item.dealName,
                                 status: false,
                             }
                             tempList.push(obj)
-                            
+
                         }
                         resolve()
-                     }).catch((err) => {
+                    }).catch((err) => {
                         console.log(err)
                         reject(err)
-    
-                     })
+
+                    })
                 }
             })
-          
-           
+
+
         })
         await Promise.all(promises)
 
- 
+
         console.log(tempList)
-        let checkOutOfStock =  tempList.some( item => item['status'] === false )
-        if(checkOutOfStock){
+        let checkOutOfStock = tempList.some(item => item['status'] === false)
+        if (checkOutOfStock) {
             this.setState({
                 checkItemAvaibility: tempList
-            },() => {console.log(this.state.checkItemAvaibility)})
-        }else{
+            }, () => { console.log(this.state.checkItemAvaibility) })
+        } else {
             this.onClickOrder();
         }
     }
@@ -136,22 +136,22 @@ class Checkout extends Component {
     }
 
     generateListProductAndDeals = () => {
-        this.props.cart.map((item,i) => {
+        this.props.cart.map((item, i) => {
             var productList = []
             var dealList = []
-         this.props.cart.map((item, i) => {
-            if (item.InventryId) {
-               productList.push(item)
-            } else {
-               dealList.push(item)
+            this.props.cart.map((item, i) => {
+                if (item.InventryId) {
+                    productList.push(item)
+                } else {
+                    dealList.push(item)
+                }
+                this.setState({ productList: productList, dealList: dealList })
             }
-            this.setState({ productList: productList, dealList:dealList })
-         }
-         )
+            )
         })
     }
 
-    onClickOrder = async() => {
+    onClickOrder = async () => {
         var obj = {
             // InventryId: this.state.InventryId,
             firstName: this.state.firstName,
@@ -197,7 +197,7 @@ class Checkout extends Component {
                     content: res.content,
                     cart: this.props.cart
                 }
-                this.props.history.push('/feedback',{'item': orderDetail});
+                this.props.history.push('/feedback', { 'item': orderDetail });
 
                 // this.getTitle(this.state.Chapter_ID)
 
@@ -231,14 +231,14 @@ class Checkout extends Component {
     }
     handleClose = () => {
         this.setState({ showModal: false })
-     }
-     handleCloseModal = () => {
+    }
+    handleCloseModal = () => {
         this.setState({ showModal: false })
-     }
-  
-     toogleModal = () => {
+    }
+
+    toogleModal = () => {
         this.setState({ showModal: true })
-     }
+    }
 
 
 
@@ -251,17 +251,17 @@ class Checkout extends Component {
                 <div className="loader-large"></div>
             )
         }
-      
+
         return (
             <>
-               <Header
-                        showModal={this.state.showModal}
-                        history={this.props.history}
-                        toogleModal={this.toogleModal}
-                        handleClose={this.handleClose}
+                <Header
+                    showModal={this.state.showModal}
+                    history={this.props.history}
+                    toogleModal={this.toogleModal}
+                    handleClose={this.handleClose}
 
-                    />
-                <section className='container'>
+                />
+                <section className=''>
                     <div className='checkoutContainer'>
                         <div className='col-md-12 mt-mb-30 text-center'>
                             <p className='heading poppins_bold'>CHECKOUT <label className='primarycolor'>  PLACE </label>  YOUR ORDER</p>
@@ -388,12 +388,8 @@ class Checkout extends Component {
                                             </div>
                                         </div>
                                     </div>
-                                    {this.state.checkItemAvaibility.length > 0 && this.state.checkItemAvaibility.map((item,i)=>{
-                                        return(
-                                            <div>{item.name}</div>
-                                        )
-                                    }) }
-                                    
+    
+
                                     <div className='col-md-12'>
 
                                         <div className='PaymentCard'>
@@ -442,7 +438,7 @@ class Checkout extends Component {
 
                                                                     <>
 
-                                                                    <div className='col-12 my-auto'>
+                                                                        <div className='col-12 my-auto'>
                                                                             <div className='row'>
                                                                                 <div className='col-5'>
                                                                                     <img className=' CheckoutCartitemImg' src={item?.DealImages[0]?.imageUrl} />
@@ -450,7 +446,7 @@ class Checkout extends Component {
                                                                                 </div>
                                                                                 <div className='col-7'>
                                                                                     <p className='poppins_bold '>{item?.dealName}</p>
-                                                                                    <p className='poppins_semibold CartItemCardtext2'>{item.dealPrice *item?.quantity}</p>
+                                                                                    <p className='poppins_semibold CartItemCardtext2'>{item.dealPrice * item?.quantity}</p>
 
                                                                                 </div>
                                                                             </div>
@@ -487,7 +483,7 @@ class Checkout extends Component {
                                                                                 </div>
                                                                                 <div className='col-7'>
                                                                                     <p className='poppins_bold '>{item.title}</p>
-                                                                                    <p className='poppins_semibold CartItemCardtext2'>$ {item.price *item?.quantity }</p>
+                                                                                    <p className='poppins_semibold CartItemCardtext2'>$ {item.price * item?.quantity}</p>
 
                                                                                 </div>
                                                                             </div>
@@ -506,7 +502,7 @@ class Checkout extends Component {
                                         })}
                                     </div>
 
-                                    <div className='GrandTotalCard'>
+                                    <div className='GrandTotalCard col-md-12'>
                                         <div className='col-12'>
 
                                             <div className='col-12'>
@@ -539,6 +535,13 @@ class Checkout extends Component {
                                                         </div>
                                                     </div>
                                                 </div>
+                                                {this.state.checkItemAvaibility.length > 0 && this.state.checkItemAvaibility.map((item, i) => {
+                                        return (
+                                            <div>
+                                                <p className='notAvailble col-md-12'>{item.name} is not Available</p>
+                                            </div>
+                                        )
+                                    })}
                                                 <div className='col-md-12 text-center mt-3'>
 
                                                     <button className='Paynowbtn' onClick={() => this.checkQuantityOfProductDeal()}>Pay ${this.state.price}</button>

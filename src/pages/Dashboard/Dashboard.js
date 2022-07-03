@@ -490,7 +490,7 @@ class Dashboard extends Component {
                         Our products are handpicked by our highly knowledgeable cannabis curators and we also offer accessories that compliment our cannabis for your experience.
                         We value integrity and quality in our products and are dedicated to providing the best quality cannabis products we can find for our consumer's medical needs and/or recreational experience.</p>
 
-                     <img className='mt-5 logoimg ' src={Logo} />
+                     <img className='mt-5 logoimg1 ' src={Logo} />
                   </div>
                </div>
 

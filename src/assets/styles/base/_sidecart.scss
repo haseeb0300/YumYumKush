@@ -117,6 +117,10 @@ $primary-color: #78C2A4;
     border: 2px solid $primary-color;
 
 }
+.sideCart .MobileCartItemImg{
+    height: 80px;
+}
+
 @media (max-width: 767px) {
     .sideCart .modal-content {
         width: 80%;
@@ -129,6 +133,7 @@ $primary-color: #78C2A4;
         margin-top: 10px;
         margin-bottom: 10px;
         padding: 5px 0px;
+        height: fit-content;
     }
     .CartBottomText2 {
         font-size: 16px;

@@ -13,6 +13,10 @@ $primary-color: #78C2A4;
         height: 146px;
         object-fit: cover;
     }
+    .logoimg1{
+        height: 146px;
+        object-fit: cover;
+    }
     .pt-pb-30{
         padding-top: 30px;
         padding-bottom: 10px;
@@ -62,7 +66,11 @@ $primary-color: #78C2A4;
         z-index: 2;
         background: black;    }
     .logoimg{
-        width: 67% !important;
+        width: 55% !important;
+
+    }
+    .logoimg1{
+        width: 100% !important;
 
     }
     .bars{
