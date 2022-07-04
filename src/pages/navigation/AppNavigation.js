@@ -48,7 +48,7 @@ import { logoutUser, setCurrentUser } from '../../store/actions/authAction';
 if (process.env.NODE_ENV === 'production') {
     axios.defaults.baseURL = 'https://api.yumyumkushh.com/v1';
 } else {
-    axios.defaults.baseURL = 'https://api.yumyumkushh.com/';
+    axios.defaults.baseURL = 'https://api.yumyumkushh.com/v1';
 }
 axios.defaults.headers.post['Content-Type'] = 'application/json';
 if (localStorage.jwtToken) {
@@ -86,20 +86,20 @@ class AppNavigation extends Component {
            inventoryList: [],
            categoryList: [],
            showModal: false,
-  
-  
-  
+
+
+
         };
      }
 
     handleClose = () => {
         this.setState({ showModal: false })
      }
-    
+
      toogleModal = () => {
         this.setState({ showModal: !this.state.showModal })
      }
-  
+
     render() {
         const { user } = this.props
         console.log(user)
@@ -111,7 +111,7 @@ class AppNavigation extends Component {
                 {/* { user.Full_Name && <UserHeader />} */}
 
                 <ScrollToTop>
-                 
+
                     <Switch >
                         <Route exact path="/"
                             component={Dashboard} />
