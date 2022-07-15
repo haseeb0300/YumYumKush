@@ -388,7 +388,7 @@ class Checkout extends Component {
                                             </div>
                                         </div>
                                     </div>
-    
+
 
                                     <div className='col-md-12'>
 
@@ -538,7 +538,9 @@ class Checkout extends Component {
                                                 {this.state.checkItemAvaibility.length > 0 && this.state.checkItemAvaibility.map((item, i) => {
                                         return (
                                             <div>
+                                                {!item.status && (
                                                 <p className='notAvailble col-md-12'>{item.name} is not Available</p>
+                                                )}
                                             </div>
                                         )
                                     })}

@@ -86,20 +86,20 @@ class AppNavigation extends Component {
            inventoryList: [],
            categoryList: [],
            showModal: false,
-  
-  
-  
+
+
+
         };
      }
 
     handleClose = () => {
         this.setState({ showModal: false })
      }
-    
+
      toogleModal = () => {
         this.setState({ showModal: !this.state.showModal })
      }
-  
+
     render() {
         const { user } = this.props
         console.log(user)
@@ -111,7 +111,7 @@ class AppNavigation extends Component {
                 {/* { user.Full_Name && <UserHeader />} */}
 
                 <ScrollToTop>
-                 
+
                     <Switch >
                         <Route exact path="/"
                             component={Dashboard} />
