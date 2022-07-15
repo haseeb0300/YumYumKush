@@ -48,7 +48,7 @@ import { logoutUser, setCurrentUser } from '../../store/actions/authAction';
 if (process.env.NODE_ENV === 'production') {
     axios.defaults.baseURL = 'https://api.yumyumkushh.com/v1';
 } else {
-    axios.defaults.baseURL = 'https://api.yumyumkushh.com/';
+    axios.defaults.baseURL = 'https://api.yumyumkushh.com/v1';
 }
 axios.defaults.headers.post['Content-Type'] = 'application/json';
 if (localStorage.jwtToken) {

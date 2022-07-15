@@ -15,18 +15,6 @@ import '../assets/styles/base/_checkout.scss'
 import '../assets/styles/base/_product.scss'
 import '../assets/styles/base/_productdetail.scss'
 
-
-
-
-
-
-
-
-
-
-
-
-
 class App extends Component {
     render() {
         return (

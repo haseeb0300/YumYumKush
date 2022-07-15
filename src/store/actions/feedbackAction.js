@@ -22,3 +22,18 @@ export const createFeedback = feedbackData => dispatch => {
         return Promise.reject(err)
       });
   };
+
+  export const getAboutUs = () => dispatch => {
+    return axios
+        .get('/api/aboutus')
+        .then((res) => {
+            console.log(res)
+  
+            return Promise.resolve(res.data)
+        }).catch((err) => {
+            console.log(err)
+            return Promise.reject(err)
+        })
+  
+  
+  }

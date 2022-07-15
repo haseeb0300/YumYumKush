@@ -16,6 +16,7 @@ import envolpe from '../../assets/images/dashboard/section7/envolpe.png'
 import { Link, withRouter } from 'react-router-dom';
 import { getDeal, getInventory, getCategory } from '../../store/actions/productAction';
 import { addToCart, removeFromCart } from '../../store/actions/cartAction';
+import { getAboutUs } from '../../store/actions/feedbackAction';
 
 import Footer from '../../component/Footer'
 
@@ -31,6 +32,7 @@ class Dashboard extends Component {
          inventoryList: [],
          categoryList: [],
          showModal: false,
+         aboutusList:[]
 
 
 
@@ -68,6 +70,18 @@ class Dashboard extends Component {
          console.log(err)
 
       })
+      this.props.getAboutUs().then((res) => {
+         console.log(res)
+         this.setState({
+            aboutusList: res.content,
+         }
+         )
+      }).catch((err) => {
+         console.log(err)
+
+      })
+
+      
    }
    renderDeals = () => {
       if (this.state.dealList && this.state.dealList.length < 1) {
@@ -212,7 +226,7 @@ class Dashboard extends Component {
    render() {
       // const { t, i18n } = this.props
       const { t, i18n, location, user } = this.props
-      const { isLoading, inventoryList } = this.state;
+      const { isLoading, inventoryList,aboutusList} = this.state;
       if (isLoading) {
          return (
             <div className="loader-large"></div>
@@ -484,11 +498,8 @@ class Dashboard extends Component {
                <div className='col-md-12 mt-mb-30 text-center'>
                   <div className='centerheading'>
                      <p className='text1 poppins_regular'><label className='horizontal-Line'></label> ABOUT US <label className='horizontal-Line'></label></p>
-                     <p className='heading poppins_bold'>LET US KNOW ABOUT US MORE    </p>
-                     <p className='text2 poppins_light'>If you live, work or are just passing through the 760 High Desert area, call Route 66 Dispensary. Route 66 is the premier dispensary for miles around.
-                        We strive to provide every customer with a great delivery experience, as well as pride ourselves in having a variety of THC and CBD products to choose from that can be delivered straight to you.
-                        Our products are handpicked by our highly knowledgeable cannabis curators and we also offer accessories that compliment our cannabis for your experience.
-                        We value integrity and quality in our products and are dedicated to providing the best quality cannabis products we can find for our consumer's medical needs and/or recreational experience.</p>
+                     <p className='heading poppins_bold'>{aboutusList.heading}    </p>
+                     <p className='text2 poppins_light'>{aboutusList.description} </p>
 
                      <img className='mt-5 logoimg1 ' src={Logo} />
                   </div>
@@ -539,7 +550,8 @@ const mapDispatchToProps = ({
    getInventory,
    getCategory,
    addToCart,
-   removeFromCart
+   removeFromCart,
+   getAboutUs
 })
 Dashboard.propTypes = {
 };
