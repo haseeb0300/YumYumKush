@@ -32,7 +32,10 @@ class Dashboard extends Component {
          inventoryList: [],
          categoryList: [],
          showModal: false,
-         aboutusList:[]
+         aboutusList:{},
+         dealDescriptionObj:{},
+         testimonialObj:{},
+         objectiveObj:{},
 
 
 
@@ -70,7 +73,7 @@ class Dashboard extends Component {
          console.log(err)
 
       })
-      this.props.getAboutUs().then((res) => {
+      this.props.getAboutUs("1").then((res) => {
          console.log(res)
          this.setState({
             aboutusList: res.content,
@@ -80,6 +83,37 @@ class Dashboard extends Component {
          console.log(err)
 
       })
+      this.props.getAboutUs("2").then((res) => {
+         console.log(res)
+         this.setState({
+            testimonialObj: res.content,
+         }
+         )
+      }).catch((err) => {
+         console.log(err)
+
+      })
+      this.props.getAboutUs("4").then((res) => {
+         console.log(res)
+         this.setState({
+            dealDescriptionObj: res.content,
+         }
+         )
+      }).catch((err) => {
+         console.log(err)
+
+      })
+      this.props.getAboutUs("3").then((res) => {
+         console.log(res)
+         this.setState({
+            objectiveObj: res.content,
+         }
+         )
+      }).catch((err) => {
+         console.log(err)
+
+      })
+
 
       
    }
@@ -226,7 +260,7 @@ class Dashboard extends Component {
    render() {
       // const { t, i18n } = this.props
       const { t, i18n, location, user } = this.props
-      const { isLoading, inventoryList,aboutusList} = this.state;
+      const { isLoading, inventoryList,aboutusList ,testimonialObj,dealDescriptionObj,objectiveObj} = this.state;
       if (isLoading) {
          return (
             <div className="loader-large"></div>
@@ -247,8 +281,8 @@ class Dashboard extends Component {
                   <div className='row'>
                      <div className='col-md-7'>
                         <p className='text1 poppins_regular'><label className='horizontal-Line'></label>All types of herbal products</p>
-                        <p className='heading poppins_bold'>WE HELP <label className='primarycolor'> PEOPLE</label> ELEVATE THEIR HAPPINESS.</p>
-                        <p className='text2 poppins_regular'>We strive to provide every customer with a great delivery experience, as well as pride ourselves in having a variety of THC and CBD products to choose from that can be delivered straight to you.</p>
+                        <p className='heading poppins_bold'>{objectiveObj.heading}</p>
+                        <p className='text2 poppins_regular'>{objectiveObj.description}</p>
                         <Link to="/product">
 
                            <button className='btn primarycolor' >Buy Now</button>
@@ -273,8 +307,8 @@ class Dashboard extends Component {
                <div className='col-md-12 mt-mb-30 text-center'>
                   <div className='centerheading'>
                      <p className='text1 poppins_regular'><label className='horizontal-Line'></label> Our Deals <label className='horizontal-Line'></label></p>
-                     <p className='heading poppins_bold'>New Hours of <label className='primarycolor'> Operation</label>  starting 2/4/22 will be 7am - Midnight</p>
-                     <p className='text2 poppins_light'>WE HELP PEOPLE ELEVATE THEIR HAPPINESS.</p>
+                     <p className='heading poppins_bold'>{dealDescriptionObj.heading}</p>
+                     <p className='text2 poppins_light'>{dealDescriptionObj.description}</p>
                   </div>
                </div>
                <div className='col-md-12'>
@@ -379,7 +413,7 @@ class Dashboard extends Component {
                   <div className='row'>
                      <div className='col-md-7'>
                         <p className='text1 poppins_regular'><label className='horizontal-Line'></label>Testimonials</p>
-                        <p className='heading poppins_bold'>WHAT OUR VALUABLE <label className='primarycolor'> CLIENTS</label> SAY ABOUT US..</p>
+                        <p className='heading poppins_bold'>{testimonialObj.heading}</p>
 
                      </div>
 
@@ -439,8 +473,7 @@ class Dashboard extends Component {
                         </div>
                      </div>
                      <div className='col-md-6 mt-3'>
-                        <p className='poppins_semibold text3'>We build trust and transparency between customer and our company.</p>
-                        <p className='poppins_light text3'>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.</p>
+                        <p className='poppins_light text3'>{testimonialObj.description}</p>
 
                      </div>
 

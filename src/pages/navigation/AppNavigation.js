@@ -86,9 +86,6 @@ class AppNavigation extends Component {
            inventoryList: [],
            categoryList: [],
            showModal: false,
-
-
-
         };
      }
 
