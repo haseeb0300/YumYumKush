@@ -415,6 +415,7 @@ class Dashboard extends Component {
                         <p className='text1 poppins_regular'><label className='horizontal-Line'></label>Testimonials</p>
                         <p className='heading poppins_bold'>{testimonialObj.heading}</p>
 
+
                      </div>
 
                   </div>
