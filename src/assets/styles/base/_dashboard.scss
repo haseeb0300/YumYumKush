@@ -3,6 +3,48 @@ $primary-color: #78C2A4;
 $HeadingSize: 45px;
 $TitleSize : 14px;
 //carsole
+.verifcationModal{
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    height: 94%;
+    padding: 0px 10%;
+    color: #000;
+    .verifcationModalContainer{
+        padding: 40px;
+
+    }
+    h1{
+        font-size: 25px
+    }
+    h2{
+        font-size: 18px;
+        color: rgb(94, 92, 92);
+        margin: 20px 0px;
+    }
+    button{
+        
+    font-size: 16px;
+    height: 52px;
+    width: 200px;
+    padding: 0px 20px;
+    font-family: 'Poppins';
+    font-weight: 400;
+    background: black;
+    color: white;
+    border-radius: 8px;
+    display: block;
+   
+    margin: 20px auto;
+    }
+    button:hover{
+        background: white;
+        color: black;
+        border: 2px solid black;
+    }
+
+}
 .carousel .slide {
    
     background: #000; 
@@ -531,6 +573,18 @@ $TitleSize : 14px;
     }
 }
 @media (max-width: 767px) {
+    .verifcationModal{
+        display: flex;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    padding: 0px;
+    color: #000;
+    position: absolute;
+    left: -5px;
+    height: 100vh;
+    }
     .section1 {
         .heading{
             font-size: 25px;

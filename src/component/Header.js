@@ -248,6 +248,12 @@ class Contact extends Component {
                            <div className='my-auto ml-4 mr-4' onClick={() => this.props.toogleModal()}>
                               <img   src={Cart} />
                            </div>
+                           <div className='my-auto'>
+                              <a href="tel:+923002057278">
+                              <span className='telephoneicon'><i class="fa fa-phone" aria-hidden="true"></i></span>   
+                              </a>
+             
+                           </div>
                         </div>
 
 
@@ -259,15 +265,29 @@ class Contact extends Component {
             <div className='MobileHeader'>
                <div className='col-12  p-0'>
                   <div className='row'>
-                     <div className='col-8'>
+                     <div className='col-7'>
                         <img className='w-100 logoimg ' src={Logo} />
 
                      </div>
+                     <div className='col-1 vertical_center text-center'>
+                    
+                     </div>
                      <div className='col-4 vertical_center text-right'>
-                        <button className='barbtn' type="button" data-toggle="collapse" data-target="#demo"  >
+                        <div className='row m-0'>
+                           <div className='col-3 my-auto p-0'>
+                           <a href="tel:+923002057278">
+                              <span className='telephoneicon'><i class="fa fa-phone" aria-hidden="true"></i></span>   
+                              </a>
+                           </div>
+                           <div className='col-9 p-0'>
+                           <button className='barbtn' type="button" data-toggle="collapse" data-target="#demo"  >
                            <i class="fa fa-bars bars" aria-hidden="true"></i>
                         </button>
+                           </div>
+                        </div>
+                       
                      </div>
+                    
                   </div>
 
                   <div id="demo" class="collapse">

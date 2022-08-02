@@ -6,6 +6,7 @@ import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a lo
 import Header from '../../component/Header'
 import section1img from '../../assets/images/dashboard/section1/1.png'
 
+import { Modal } from 'react-bootstrap';
 
 import TestimonialImg1 from '../../assets/images/dashboard/section6/1.png'
 import TestimonialImg2 from '../../assets/images/dashboard/section6/2.png'
@@ -32,10 +33,12 @@ class Dashboard extends Component {
          inventoryList: [],
          categoryList: [],
          showModal: false,
-         aboutusList:{},
-         dealDescriptionObj:{},
-         testimonialObj:{},
-         objectiveObj:{},
+         aboutusList: {},
+         dealDescriptionObj: {},
+         testimonialObj: {},
+         objectiveObj: {},
+         ageVerificationModal: true,
+
 
 
 
@@ -115,7 +118,7 @@ class Dashboard extends Component {
       })
 
 
-      
+
    }
    renderDeals = () => {
       if (this.state.dealList && this.state.dealList.length < 1) {
@@ -131,7 +134,7 @@ class Dashboard extends Component {
          <>
             <div className='col-md-6'>
                <div className='col-md-12'>
-                  <div className='deal-card'  onClick={() => this.onclickDealItem(item)}>
+                  <div className='deal-card' onClick={() => this.onclickDealItem(item)}>
 
                      <div className='row'>
                         <div className='col-md-4'>
@@ -164,15 +167,15 @@ class Dashboard extends Component {
 
       this.props.history.push('/categoryproduct', { item: item })
    }
-   
+
    onclickDealItem = (item) => {
 
       this.props.history.push('/dealdetail', { item: item })
-  }
+   }
    onclickInventoryItem = (item) => {
 
       this.props.history.push('/productdetail', { item: item })
-  }
+   }
    renderInventory = () => {
       if (this.state.inventoryList && this.state.inventoryList.length < 1) {
 
@@ -187,15 +190,15 @@ class Dashboard extends Component {
          <>
             <div className='col-md-4'>
 
-                  <div className='ExploreCard'  onClick={() => this.onclickInventoryItem(item)}>
-                     <p className='poppins_semibold newArrival'>New Arrival</p>
-                     <img className='ExploreCardImg' src={item.InventryImages[0]?.imageUrl} />
-                     <p className='poppins_bold ExploreCardtext1'>{item.title}</p>
-                     <p className='poppins_regular ExploreCardtext2'>{item.status}</p>
-                     <p className='poppins_semibold ExploreCardtext3'>$ {item.InventryParams[0]?.price}</p>
-                   
+               <div className='ExploreCard' onClick={() => this.onclickInventoryItem(item)}>
+                  <p className='poppins_semibold newArrival'>New Arrival</p>
+                  <img className='ExploreCardImg' src={item.InventryImages[0]?.imageUrl} />
+                  <p className='poppins_bold ExploreCardtext1'>{item.title}</p>
+                  <p className='poppins_regular ExploreCardtext2'>{item.status}</p>
+                  <p className='poppins_semibold ExploreCardtext3'>$ {item.InventryParams[0]?.price}</p>
 
-                  </div>
+
+               </div>
             </div>
 
          </>
@@ -260,7 +263,7 @@ class Dashboard extends Component {
    render() {
       // const { t, i18n } = this.props
       const { t, i18n, location, user } = this.props
-      const { isLoading, inventoryList,aboutusList ,testimonialObj,dealDescriptionObj,objectiveObj} = this.state;
+      const { isLoading, inventoryList, aboutusList, testimonialObj, dealDescriptionObj, objectiveObj } = this.state;
       if (isLoading) {
          return (
             <div className="loader-large"></div>
@@ -268,13 +271,41 @@ class Dashboard extends Component {
       }
       return (
          <>
-           <Header
-                        showModal={this.state.showModal}
-                        history={this.props.history}
-                        toogleModal={this.toogleModal}
-                        handleClose={this.handleClose}
+            <Header
+               showModal={this.state.showModal}
+               history={this.props.history}
+               toogleModal={this.toogleModal}
+               handleClose={this.handleClose}
 
-                    />
+            />
+            <Modal
+
+               dialogClassName="col-xl-12  verifcationModal  "
+               show={this.state.ageVerificationModal}
+               size="lg"
+               aria-labelledby="contained-modal-title-vcenter"
+               animation={false}
+            >
+
+
+               <div className="  modal-body p-0">
+                  <div className='col-12 text-center verifcationModalContainer'>
+                  <h1 className='poppins_medium'>Welcome!</h1>
+                  <h2 className='poppins_regular'>Due to regulations, you must be 21 years or older to view this site. Please confirm your age.</h2>
+                  <button onClick={() => this.setState({ ageVerificationModal: false })}>I'M 21 OR OLDER</button>
+                 <a href='https://www.google.com/'>
+                 <button>I'M Under 21</button>
+                 </a>
+                  </div>
+               
+             
+
+
+
+               </div>
+
+
+            </Modal>
             {/* section1 */}
             <section id="Home" className='container section1'>
                <div className='col-md-12 mt-mb-30'>
@@ -352,7 +383,7 @@ class Dashboard extends Component {
 
 
                   </div>
-                  
+
 
 
 
@@ -372,7 +403,7 @@ class Dashboard extends Component {
                <div className='col-md-12'>
                   <div className='row'>
                      {this.renderInventory()}
-                    
+
                   </div>
                </div>
 
@@ -574,7 +605,7 @@ class Dashboard extends Component {
    }
 
 }
-const mapStatetoProps = ({ auth,cart }) => ({
+const mapStatetoProps = ({ auth, cart }) => ({
    user: auth.user,
    cart: cart?.cart
 
