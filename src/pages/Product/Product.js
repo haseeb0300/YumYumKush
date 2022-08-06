@@ -81,7 +81,7 @@ class Product extends Component {
             <div className='col-md-4'>
                <div className='ExploreCard'  onClick={() => this.onclickInventoryItem(item)}>
                   <p className='poppins_semibold newArrival'>New Arrival</p>
-                  <img className='ExploreCardImg' src={item.InventryImages[i]?.imageUrl} />
+                  <img className='ExploreCardImg' src={item.InventryImages[0]?.imageUrl} />
                   <p className='poppins_bold ExploreCardtext1'>{item.title}</p>
                   <p className='poppins_regular ExploreCardtext2'>{item.status}</p>
                   <p className='poppins_semibold ExploreCardtext3'>$ {item.InventryParams[0]?.price}</p>
@@ -132,6 +132,7 @@ class Product extends Component {
                     />
             {/* section4 start */}
             <section className=' section4'>
+               
                <div className="col-md-12 productPage">
 
                   <div className='row'>
@@ -185,7 +186,13 @@ class Product extends Component {
                         </div>
                      </div>
                      <div className='col-md-9'>
-
+                     <div className='col-md-12 mt-mb-30 text-center'>
+                  <div className='centerheading'>
+                     <p className='text1 poppins_regular'><label className='horizontal-Line'></label> EXPLORE! <label className='horizontal-Line'></label></p>
+                     <p className='heading poppins_bold'>EXPLORE OUR  <label className='primarycolor'> PRODUCTS</label> </p>
+                     <p className='text2 poppins_light'>WE HELP PEOPLE ELEVATE THEIR HAPPINESS.</p>
+                  </div>
+               </div>
                         <div className='col-md-12'>
                            <div className='row'>
                               {this.renderInventory()}
